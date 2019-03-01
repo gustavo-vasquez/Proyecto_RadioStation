@@ -80,6 +80,8 @@
             this.txtCustomRadio.Name = "txtCustomRadio";
             this.txtCustomRadio.Size = new System.Drawing.Size(179, 20);
             this.txtCustomRadio.TabIndex = 0;
+            this.txtCustomRadio.Enter += new System.EventHandler(this.txtCustomRadio_Enter);
+            this.txtCustomRadio.Leave += new System.EventHandler(this.txtCustomRadio_Leave);
             // 
             // btnCustomRadio
             // 

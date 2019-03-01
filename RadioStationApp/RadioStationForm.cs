@@ -19,6 +19,7 @@ namespace RadioStationApp
     public partial class RadioStation : Form
     {        
         private VlcMediaPlayer _vlcMediaPlayer;
+        private const string txtCustomRadioDefaultText = "Pegar stream url...";
 
         public RadioStation()
         {
@@ -132,6 +133,24 @@ namespace RadioStationApp
                     Assembly.GetEntryAssembly().GetName().Version.ToString()
                 );
             DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void txtCustomRadio_Enter(object sender, EventArgs e)
+        {
+            if (txtCustomRadio.Text.Equals(txtCustomRadioDefaultText))
+            {
+                txtCustomRadio.Text = string.Empty;
+                txtCustomRadio.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void txtCustomRadio_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCustomRadio.Text))
+            {
+                txtCustomRadio.Text = txtCustomRadioDefaultText;
+                txtCustomRadio.ForeColor = SystemColors.GrayText;
+            }
         }
     }
 }
