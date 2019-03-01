@@ -114,6 +114,24 @@ namespace RadioStationApp
                 btnLaRed.Enabled = true;
             else if (!btnContinental.Enabled)
                 btnContinental.Enabled = true;
-        }        
+        }
+
+        private void btnProductInfo_Click(object sender, EventArgs e)
+        {
+            string appInfoText = String.Join(
+                    null,
+                    ProjectInfo.Product,
+                    Environment.NewLine,
+                    ProjectInfo.Description,
+                    Environment.NewLine,
+                    Environment.NewLine,
+                    ProjectInfo.Copyright,
+                    Environment.NewLine,
+                    Environment.NewLine,
+                    "Versión: ",
+                    Assembly.GetEntryAssembly().GetName().Version.ToString()
+                );
+            DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

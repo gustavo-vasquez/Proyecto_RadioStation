@@ -38,6 +38,7 @@
             this.imgLaRed = new System.Windows.Forms.PictureBox();
             this.imgContinental = new System.Windows.Forms.PictureBox();
             this.imgEqualizer = new System.Windows.Forms.PictureBox();
+            this.btnProductInfo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgLaRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgContinental)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEqualizer)).BeginInit();
@@ -65,7 +66,7 @@
             // btnStopStream
             // 
             this.btnStopStream.Enabled = false;
-            this.btnStopStream.Location = new System.Drawing.Point(73, 227);
+            this.btnStopStream.Location = new System.Drawing.Point(76, 226);
             this.btnStopStream.Name = "btnStopStream";
             this.btnStopStream.Size = new System.Drawing.Size(129, 23);
             this.btnStopStream.TabIndex = 2;
@@ -131,11 +132,22 @@
             this.imgEqualizer.TabStop = false;
             this.imgEqualizer.Visible = false;
             // 
+            // btnProductInfo
+            // 
+            this.btnProductInfo.Image = global::RadioStationApp.Properties.Resources.info;
+            this.btnProductInfo.Location = new System.Drawing.Point(222, 226);
+            this.btnProductInfo.Name = "btnProductInfo";
+            this.btnProductInfo.Size = new System.Drawing.Size(49, 23);
+            this.btnProductInfo.TabIndex = 9;
+            this.btnProductInfo.UseVisualStyleBackColor = true;
+            this.btnProductInfo.Click += new System.EventHandler(this.btnProductInfo_Click);
+            // 
             // RadioStation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.btnProductInfo);
             this.Controls.Add(this.imgEqualizer);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.imgContinental);
@@ -168,6 +180,7 @@
         private System.Windows.Forms.PictureBox imgLaRed;
         private System.Windows.Forms.PictureBox imgContinental;
         private System.Windows.Forms.PictureBox imgEqualizer;
+        private System.Windows.Forms.Button btnProductInfo;
     }
 }
 
