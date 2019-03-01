@@ -114,6 +114,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\images\buttons\info.png" />
+    <Content Include="Resources\images\buttons\speaker.png" />
+    <Content Include="Resources\images\buttons\speaker_mute.png" />
+    <Content Include="Resources\images\buttons\stop.png" />
     <Content Include="Resources\images\equalizer.gif" />
     <Content Include="Resources\images\Radio_LaRed_AM_910.jpg" />
     <Content Include="Resources\images\Radio_Continental_AM_590.png" />
