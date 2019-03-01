@@ -101,6 +101,7 @@
             this.btnMute.Size = new System.Drawing.Size(48, 23);
             this.btnMute.TabIndex = 4;
             this.btnMute.UseVisualStyleBackColor = true;
+            this.btnMute.Click += new System.EventHandler(this.btnMute_Click);
             // 
             // btnProductInfo
             // 

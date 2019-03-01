@@ -152,5 +152,24 @@ namespace RadioStationApp
                 txtCustomRadio.ForeColor = SystemColors.GrayText;
             }
         }
+
+        private void btnMute_Click(object sender, EventArgs e)
+        {
+            if(_vlcMediaPlayer.IsPlaying())
+            {
+                Button btnMuteClicked = (Button)sender;
+
+                if (_vlcMediaPlayer.Audio.IsMute)
+                {
+                    btnMuteClicked.Image = Properties.Resources.speaker;
+                    _vlcMediaPlayer.Audio.IsMute = false;
+                }
+                else
+                {
+                    btnMuteClicked.Image = Properties.Resources.speaker_mute;
+                    _vlcMediaPlayer.Audio.IsMute = true;
+                }
+            }
+        }
     }
 }
