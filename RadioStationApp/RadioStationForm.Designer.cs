@@ -50,7 +50,7 @@
             this.btnLaRed.Location = new System.Drawing.Point(48, 177);
             this.btnLaRed.Name = "btnLaRed";
             this.btnLaRed.Size = new System.Drawing.Size(75, 23);
-            this.btnLaRed.TabIndex = 0;
+            this.btnLaRed.TabIndex = 2;
             this.btnLaRed.Text = "LaRed";
             this.btnLaRed.UseVisualStyleBackColor = true;
             this.btnLaRed.Click += new System.EventHandler(this.btnLaRed_Click);
@@ -79,14 +79,14 @@
             this.txtCustomRadio.Location = new System.Drawing.Point(12, 49);
             this.txtCustomRadio.Name = "txtCustomRadio";
             this.txtCustomRadio.Size = new System.Drawing.Size(179, 20);
-            this.txtCustomRadio.TabIndex = 4;
+            this.txtCustomRadio.TabIndex = 0;
             // 
             // btnCustomRadio
             // 
             this.btnCustomRadio.Location = new System.Drawing.Point(197, 47);
             this.btnCustomRadio.Name = "btnCustomRadio";
             this.btnCustomRadio.Size = new System.Drawing.Size(75, 23);
-            this.btnCustomRadio.TabIndex = 5;
+            this.btnCustomRadio.TabIndex = 1;
             this.btnCustomRadio.Text = "Escuchar";
             this.btnCustomRadio.UseVisualStyleBackColor = true;
             this.btnCustomRadio.Click += new System.EventHandler(this.btnCustomRadio_Click);
@@ -97,7 +97,7 @@
             this.btnMute.Location = new System.Drawing.Point(12, 226);
             this.btnMute.Name = "btnMute";
             this.btnMute.Size = new System.Drawing.Size(48, 23);
-            this.btnMute.TabIndex = 10;
+            this.btnMute.TabIndex = 4;
             this.btnMute.UseVisualStyleBackColor = true;
             // 
             // btnProductInfo
@@ -106,7 +106,7 @@
             this.btnProductInfo.Location = new System.Drawing.Point(224, 226);
             this.btnProductInfo.Name = "btnProductInfo";
             this.btnProductInfo.Size = new System.Drawing.Size(48, 23);
-            this.btnProductInfo.TabIndex = 9;
+            this.btnProductInfo.TabIndex = 6;
             this.btnProductInfo.UseVisualStyleBackColor = true;
             this.btnProductInfo.Click += new System.EventHandler(this.btnProductInfo_Click);
             // 
@@ -149,7 +149,7 @@
             this.btnStopStream.Location = new System.Drawing.Point(75, 226);
             this.btnStopStream.Name = "btnStopStream";
             this.btnStopStream.Size = new System.Drawing.Size(134, 23);
-            this.btnStopStream.TabIndex = 2;
+            this.btnStopStream.TabIndex = 5;
             this.btnStopStream.Text = "Detener";
             this.btnStopStream.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStopStream.UseVisualStyleBackColor = true;
