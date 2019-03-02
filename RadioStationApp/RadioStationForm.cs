@@ -20,6 +20,8 @@ namespace RadioStationApp
     {        
         private VlcMediaPlayer _vlcMediaPlayer;
         private const string txtCustomRadioDefaultText = "Pegar stream url...";
+        private ThumbnailToolBarButton thumbnailBtnMute;
+        private ThumbnailToolBarButton thumbnailBtnStop;
 
         public RadioStation()
         {
@@ -36,6 +38,13 @@ namespace RadioStationApp
             _vlcMediaPlayer.Playing += VlcMediaPlayerOnPlaying;
             _vlcMediaPlayer.Stopped += VlcMediaPlayerOnStopped;
             _vlcMediaPlayer.EncounteredError += VlcMediaPlayerOnEncounteredError;
+
+            thumbnailBtnMute = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
+            thumbnailBtnMute.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(thumbnailBtnMute_Click);
+            thumbnailBtnStop = new ThumbnailToolBarButton(Properties.Resources.stop_icon, "Detener");
+            thumbnailBtnStop.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(btnStopStream_Click);
+            thumbnailBtnStop.Enabled = false;
+            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, thumbnailBtnMute, thumbnailBtnStop);
         }
 
         private void VlcMediaPlayerOnEncounteredError(object sender, VlcMediaPlayerEncounteredErrorEventArgs e)
@@ -51,6 +60,7 @@ namespace RadioStationApp
             this.Invoke(new MethodInvoker(delegate () {
                 this.imgEqualizer.Visible = true;
                 this.btnStopStream.Enabled = true;
+                this.thumbnailBtnStop.Enabled = true;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
             }));
         }
@@ -62,6 +72,7 @@ namespace RadioStationApp
                 this.ResetButtonsOfRadioStreams();
                 this.imgEqualizer.Visible = false;
                 this.btnStopStream.Enabled = false;
+                this.thumbnailBtnStop.Enabled = false;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
                 TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
             }));
@@ -97,9 +108,13 @@ namespace RadioStationApp
         }
 
         private void btnStopStream_Click(object sender, EventArgs e)
-        {            
-            _vlcMediaPlayer.Stop();
-            this.txtMessage.Text = "-";
+        {
+            DoStopStream();
+        }
+
+        private void thumbnailBtnStop_Click(object sender, ThumbnailButtonClickedEventArgs e)
+        {
+            DoStopStream();
         }
 
         private void SetRadio(string streamUrl, string message)
@@ -155,21 +170,39 @@ namespace RadioStationApp
 
         private void btnMute_Click(object sender, EventArgs e)
         {
-            if(_vlcMediaPlayer.IsPlaying())
-            {
-                Button btnMuteClicked = (Button)sender;
+            DoMuteStream();
+        }
 
+        private void thumbnailBtnMute_Click(object sender, ThumbnailButtonClickedEventArgs e)
+        {
+            DoMuteStream();
+        }
+
+        private void DoMuteStream()
+        {
+            if (_vlcMediaPlayer.IsPlaying())
+            {
                 if (_vlcMediaPlayer.Audio.IsMute)
-                {
-                    btnMuteClicked.Image = Properties.Resources.speaker;
+                {                    
+                    btnMute.Image = Properties.Resources.speaker;
+                    thumbnailBtnMute.Icon = Properties.Resources.speaker_icon;
+                    thumbnailBtnMute.Tooltip = "Silenciar";
                     _vlcMediaPlayer.Audio.IsMute = false;
                 }
                 else
                 {
-                    btnMuteClicked.Image = Properties.Resources.speaker_mute;
+                    btnMute.Image = Properties.Resources.speaker_mute;
+                    thumbnailBtnMute.Icon = Properties.Resources.speaker_mute_icon;
+                    thumbnailBtnMute.Tooltip = "Encender";
                     _vlcMediaPlayer.Audio.IsMute = true;
                 }
             }
+        }
+
+        private void DoStopStream()
+        {
+            _vlcMediaPlayer.Stop();
+            this.txtMessage.Text = "-";
         }
     }
 }

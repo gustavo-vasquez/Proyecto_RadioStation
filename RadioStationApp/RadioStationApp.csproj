@@ -113,6 +113,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\icons\thumbnails\speaker_icon.ico" />
+    <Content Include="Resources\icons\thumbnails\speaker_mute_icon.ico" />
+    <Content Include="Resources\icons\thumbnails\stop_icon.ico" />
     <Content Include="Resources\images\buttons\info.png" />
     <Content Include="Resources\images\buttons\speaker.png" />
     <Content Include="Resources\images\buttons\speaker_mute.png" />
