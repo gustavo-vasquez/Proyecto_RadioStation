@@ -95,8 +95,8 @@
             // 
             // btnMute
             // 
-            this.btnMute.Image = global::RadioStationApp.Properties.Resources.speaker;
-            this.btnMute.Location = new System.Drawing.Point(12, 226);
+            this.btnMute.Image = global::RadioStationApp.Properties.Resources.speaker_v2;
+            this.btnMute.Location = new System.Drawing.Point(224, 226);
             this.btnMute.Name = "btnMute";
             this.btnMute.Size = new System.Drawing.Size(48, 23);
             this.btnMute.TabIndex = 4;
@@ -105,8 +105,8 @@
             // 
             // btnProductInfo
             // 
-            this.btnProductInfo.Image = global::RadioStationApp.Properties.Resources.info;
-            this.btnProductInfo.Location = new System.Drawing.Point(224, 226);
+            this.btnProductInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnProductInfo.Image")));
+            this.btnProductInfo.Location = new System.Drawing.Point(12, 226);
             this.btnProductInfo.Name = "btnProductInfo";
             this.btnProductInfo.Size = new System.Drawing.Size(48, 23);
             this.btnProductInfo.TabIndex = 6;

@@ -63,6 +63,16 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap antenna {
+            get {
+                object obj = ResourceManager.GetObject("antenna", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
@@ -107,6 +117,26 @@ namespace RadioStationApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("speaker_mute_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speaker_mute_v2 {
+            get {
+                object obj = ResourceManager.GetObject("speaker_mute_v2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speaker_v2 {
+            get {
+                object obj = ResourceManager.GetObject("speaker_v2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

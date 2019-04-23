@@ -180,18 +180,18 @@ namespace RadioStationApp
 
         private void DoMuteStream()
         {
-            if (_vlcMediaPlayer.IsPlaying())
+            if (_vlcMediaPlayer.State == MediaStates.Playing)
             {
                 if (_vlcMediaPlayer.Audio.IsMute)
-                {                    
-                    btnMute.Image = Properties.Resources.speaker;
+                {
+                    btnMute.Image = Properties.Resources.speaker_v2;
                     thumbnailBtnMute.Icon = Properties.Resources.speaker_icon;
                     thumbnailBtnMute.Tooltip = "Silenciar";
                     _vlcMediaPlayer.Audio.IsMute = false;
                 }
                 else
                 {
-                    btnMute.Image = Properties.Resources.speaker_mute;
+                    btnMute.Image = Properties.Resources.speaker_mute_v2;
                     thumbnailBtnMute.Icon = Properties.Resources.speaker_mute_icon;
                     thumbnailBtnMute.Tooltip = "Encender";
                     _vlcMediaPlayer.Audio.IsMute = true;
