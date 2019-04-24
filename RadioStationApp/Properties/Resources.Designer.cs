@@ -63,9 +63,9 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap antenna {
+        internal static System.Drawing.Bitmap info {
             get {
-                object obj = ResourceManager.GetObject("antenna", resourceCulture);
+                object obj = ResourceManager.GetObject("info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap info {
+        internal static System.Drawing.Bitmap online_radio {
             get {
-                object obj = ResourceManager.GetObject("info", resourceCulture);
+                object obj = ResourceManager.GetObject("online_radio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -157,6 +157,16 @@ namespace RadioStationApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("stop_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wave_signal {
+            get {
+                object obj = ResourceManager.GetObject("wave_signal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

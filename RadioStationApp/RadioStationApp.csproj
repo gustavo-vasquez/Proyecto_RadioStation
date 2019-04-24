@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProjectInfo.cs" />
+    <Compile Include="RadioList.cs" />
     <Compile Include="RadioStationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,7 +117,8 @@
     <Content Include="Resources\icons\thumbnails\speaker_icon.ico" />
     <Content Include="Resources\icons\thumbnails\speaker_mute_icon.ico" />
     <Content Include="Resources\icons\thumbnails\stop_icon.ico" />
-    <Content Include="Resources\images\buttons\antenna.png" />
+    <Content Include="Resources\images\buttons\online_radio.png" />
+    <Content Include="Resources\images\buttons\wave_signal.png" />
     <Content Include="Resources\images\buttons\speaker_v2.png" />
     <Content Include="Resources\images\buttons\speaker_mute_v2.png" />
     <Content Include="Resources\images\buttons\info.png" />

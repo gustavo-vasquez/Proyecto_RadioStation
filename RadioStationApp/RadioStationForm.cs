@@ -39,6 +39,8 @@ namespace RadioStationApp
             _vlcMediaPlayer.Stopped += VlcMediaPlayerOnStopped;
             _vlcMediaPlayer.EncounteredError += VlcMediaPlayerOnEncounteredError;
 
+            RadiosPopupSetClickEvents();
+
             thumbnailBtnMute = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
             thumbnailBtnMute.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(thumbnailBtnMute_Click);
             thumbnailBtnStop = new ThumbnailToolBarButton(Properties.Resources.stop_icon, "Detener");
@@ -80,25 +82,29 @@ namespace RadioStationApp
 
         private void RadioStation_Load(object sender, EventArgs e)
         {
-            //this.btnLaRed.PerformClick();
+            
         }
 
         private void btnLaRed_Click(object sender, EventArgs e)
         {
-            this.SetRadio("https://la_red.secure2.footprint.net/egress/bhandler/streamroot_lsd2latam/la_red/chunklist_b32768.m3u8", "LaRed AM 910");            
+            this.SetRadio(RadioList.Radio["laRed"], "Radio LaRed AM 910");
             btnLaRed.Enabled = false;
 
             if (!btnContinental.Enabled)
                 btnContinental.Enabled = true;
-        }        
+
+            ResetRadiosPopup();
+        }
 
         private void btnContinental_Click(object sender, EventArgs e)
         {
-            this.SetRadio("https://20823.live.streamtheworld.com/CONTINENTAL_SC", "Continental AM 590");            
+            this.SetRadio(RadioList.Radio["continental"], "Radio Continental AM 590");
             btnContinental.Enabled = false;
 
             if (!btnLaRed.Enabled)
                 btnLaRed.Enabled = true;
+
+            ResetRadiosPopup();
         }
 
         private void btnCustomRadio_Click(object sender, EventArgs e)
@@ -121,33 +127,24 @@ namespace RadioStationApp
         {
             _vlcMediaPlayer.SetMedia(streamUrl, null);
             _vlcMediaPlayer.Play();
-            txtMessage.Text = "Estás escuchando radio " + message;            
+            txtMessage.Text = "Estás escuchando " + message;
         }
 
         private void ResetButtonsOfRadioStreams()
         {
             if (!btnLaRed.Enabled)
                 btnLaRed.Enabled = true;
-            else if (!btnContinental.Enabled)
+
+            if (!btnContinental.Enabled)
                 btnContinental.Enabled = true;
+
+            ResetRadiosPopup();
         }
 
-        private void btnProductInfo_Click(object sender, EventArgs e)
+        private void btnRadios_Click(object sender, EventArgs e)
         {
-            string appInfoText = String.Join(
-                    null,
-                    ProjectInfo.Product,
-                    Environment.NewLine,
-                    ProjectInfo.Description,
-                    Environment.NewLine,
-                    Environment.NewLine,
-                    ProjectInfo.Copyright,
-                    Environment.NewLine,
-                    Environment.NewLine,
-                    "Versión: ",
-                    Assembly.GetEntryAssembly().GetName().Version.ToString()
-                );
-            DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Button buttonMenu = sender as Button;
+            cmsRadiosPopup.Show(buttonMenu, new Point(0, 0));
         }
 
         private void txtCustomRadio_Enter(object sender, EventArgs e)
@@ -203,6 +200,64 @@ namespace RadioStationApp
         {
             _vlcMediaPlayer.Stop();
             this.txtMessage.Text = "-";
+        }
+
+        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string appInfoText = String.Join(
+                    null,
+                    ProjectInfo.Product,
+                    Environment.NewLine,
+                    ProjectInfo.Description,
+                    Environment.NewLine,
+                    Environment.NewLine,
+                    ProjectInfo.Copyright,
+                    Environment.NewLine,
+                    Environment.NewLine,
+                    "Versión: ",
+                    Assembly.GetEntryAssembly().GetName().Version.ToString()
+                );
+            DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void RadiosPopupSetClickEvents()
+        {
+            this.metro951Item.Click += RadiosToolStripMenuItem_Click;
+            this.radio10Item.Click += RadiosToolStripMenuItem_Click;
+            this.radioMitreItem.Click += RadiosToolStripMenuItem_Click;
+            this.vorterixItem.Click += RadiosToolStripMenuItem_Click;
+            this.delPlataAM1030Item.Click += RadiosToolStripMenuItem_Click;
+            this.elDestapeItem.Click += RadiosToolStripMenuItem_Click;
+            this.radioRivadaviaAM630Item.Click += RadiosToolStripMenuItem_Click;
+            this.radioLatinaFM1011Item.Click += RadiosToolStripMenuItem_Click;
+            this.cNNRadioArgentinaItem.Click += RadiosToolStripMenuItem_Click;
+        }
+
+        private void RadiosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem currentMenuItem = sender as ToolStripMenuItem;
+            
+            currentMenuItem.Owner.Items
+            .OfType<ToolStripMenuItem>().Where(i => i.Name != currentMenuItem.Name).ToList()
+            .ForEach(item =>
+            {
+                item.Enabled = true;
+                item.Checked = false;
+            });
+
+            this.SetRadio(RadioList.Radio[currentMenuItem.Name], currentMenuItem.Text);
+            currentMenuItem.Enabled = false;
+        }
+
+        private void ResetRadiosPopup()
+        {
+            cmsRadiosPopup.Items
+            .OfType<ToolStripMenuItem>().ToList()
+            .ForEach(item =>
+            {
+                item.Enabled = true;
+                item.Checked = false;
+            });
         }
     }
 }

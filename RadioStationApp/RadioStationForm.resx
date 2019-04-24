@@ -118,21 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnProductInfo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnCustomRadio.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAKRSURBVEhL3VTPaxNREI4giAcVEfSgItiDohcxpmkoljQv2V/Z3bepVNJssmKveirkqIjiP6D+
-        FWJ3EysFUfAHeCpCxYsoWCtWPdiDxyoYZ2Zn2zXZ0lR66gdD9vveN2/mze5LantCn9X38mPf6DtHn7aG
-        yr6zjL8sbYgopxw4aZaSAV3sMgP52QycDsRTljcEbN4Kc+Qi7sFyL6CDa2iEhF964AygVrw/vo8WExCt
-        4S/k/Qhz5XVaTAIUWCBTIO8gN1vSgq6+6y15igwxoIZr5bZtIzd9uxnmOgtk6IY1Y51EA4YROGdQM31n
-        nvkFMsVgtO0RaOQPnPYtcqUlj0b5SQ2lYCQ6LuJ4kJsz5mFK8J33ZACo9dpVteFeYYoNvKYNp8eOMF8h
-        DnuRIQ44ohsWkN9CXslRgcAJyADQmtVPRrP6kWkK1h6QB7zIobmvIbddMsRh+LaGi9EJVo8cO4Ey5i5B
-        LDKFAvIDjelReT9yeP5Ne7RkkQxxJL8D+SYsak8iV7XGCsRPXrvM/lnkmBPlK37lIGo9gI6WyOTLe8hx
-        ljCyF3hLh4cn96ia18HI5cZ3owYdP7EeWqfRC1/PXcwFbQ55Iv65B11fghC141GBglE7xjIBvZiDuXCS
-        CZZ7gbcwugsQj1kmCM3NRAVU1RtkmYBeznnG0vrQ2vYJeLHPhV85wBJBVevlqEBJaxgsE3DmMJqXdts+
-        xNLmAQW8tRPUPZa3DiXNm1o7gTfF8pZgB8y8WCy5X4ZyRudsutBJp8VyJqvcyufzO9nzfyjolwYUrTG3
-        OhoIUax2MoNKWOiceJc9n/C/0y8UtfEqvnm8CBbAyGaNebZvHjCaUUXzbnSHKNVujoqLtzGEmCixfVsi
-        lfoLD+1srOgeXpoAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAADaSURBVDhPtZM/CwFhHMefpMhKBoNFRrMRZVJKlGLyEgwG
+        78FCIqNJRBm9BLPFZPQSvACf3/OHTro7Vz716fv91d1zd8/dqZAkbEZmaDMyd0yb+jslvGBbTyFo2XSM
+        sIkzPQWQxKupL7YYw52eApCr3zCvJ6VSuDZVLTBjqpcyyoniEfvYQ6GBA1NVFztYQ3e8nOtZoIqy23MU
+        ppgzVWVxiSf0LPCNjc29TccZx6b6s0J5fRM9vZE7qJjqjzz3Aet6eiPfgmxsIEV84Oc/ELcZCvf6IlOw
+        +U+UegJd+Bq8/msw2wAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="imgEqualizer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -1581,6 +1574,9 @@
         Jxofm+mjgUQFdQzeF3p/6S//2Q==
 </value>
   </data>
+  <metadata name="cmsRadiosPopup.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAQEAAAAEAIAAoQgAARgAAADAwAAABACAAqCUAAG5CAAAgIAAAAQAgAKgQAAAWaAAAEBAAAAEA
