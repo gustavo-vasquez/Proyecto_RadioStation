@@ -39,8 +39,6 @@ namespace RadioStationApp
             _vlcMediaPlayer.Stopped += VlcMediaPlayerOnStopped;
             _vlcMediaPlayer.EncounteredError += VlcMediaPlayerOnEncounteredError;
 
-            RadiosPopupSetClickEvents();
-
             thumbnailBtnMute = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
             thumbnailBtnMute.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(thumbnailBtnMute_Click);
             thumbnailBtnStop = new ThumbnailToolBarButton(Properties.Resources.stop_icon, "Detener");
@@ -202,7 +200,7 @@ namespace RadioStationApp
             this.txtMessage.Text = "-";
         }
 
-        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aboutItem_Click(object sender, EventArgs e)
         {
             string appInfoText = String.Join(
                     null,
@@ -220,20 +218,7 @@ namespace RadioStationApp
             DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void RadiosPopupSetClickEvents()
-        {
-            this.metro951Item.Click += RadiosToolStripMenuItem_Click;
-            this.radio10Item.Click += RadiosToolStripMenuItem_Click;
-            this.radioMitreItem.Click += RadiosToolStripMenuItem_Click;
-            this.vorterixItem.Click += RadiosToolStripMenuItem_Click;
-            this.delPlataAM1030Item.Click += RadiosToolStripMenuItem_Click;
-            this.elDestapeItem.Click += RadiosToolStripMenuItem_Click;
-            this.radioRivadaviaAM630Item.Click += RadiosToolStripMenuItem_Click;
-            this.radioLatinaFM1011Item.Click += RadiosToolStripMenuItem_Click;
-            this.cNNRadioArgentinaItem.Click += RadiosToolStripMenuItem_Click;
-        }
-
-        private void RadiosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RadiosItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem currentMenuItem = sender as ToolStripMenuItem;
             
@@ -247,6 +232,7 @@ namespace RadioStationApp
 
             this.SetRadio(RadioList.Radio[currentMenuItem.Name], currentMenuItem.Text);
             currentMenuItem.Enabled = false;
+            btnLaRed.Enabled = btnContinental.Enabled = true;
         }
 
         private void ResetRadiosPopup()

@@ -114,6 +114,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\icons\radios\cnn_radio_argentina.png" />
+    <Content Include="Resources\icons\radios\del_plata_am1030.png" />
+    <Content Include="Resources\icons\radios\el_destape.png" />
+    <Content Include="Resources\icons\radios\metro95.1.png" />
+    <Content Include="Resources\icons\radios\radio10.png" />
+    <Content Include="Resources\icons\radios\radio_latina_fm101.1.png" />
+    <Content Include="Resources\icons\radios\radio_mitre.png" />
+    <Content Include="Resources\icons\radios\radio_rivadavia_am630.png" />
+    <Content Include="Resources\icons\radios\vorterix.png" />
     <Content Include="Resources\icons\thumbnails\speaker_icon.ico" />
     <Content Include="Resources\icons\thumbnails\speaker_mute_icon.ico" />
     <Content Include="Resources\icons\thumbnails\stop_icon.ico" />
