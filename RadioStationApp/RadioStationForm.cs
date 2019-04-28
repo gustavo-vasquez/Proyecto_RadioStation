@@ -11,14 +11,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Vlc.DotNet.Core;
-using Vlc.DotNet.Core.Interops.Signatures;
+using Un4seen.Bass;
 
 namespace RadioStationApp
 {
     public partial class RadioStation : Form
-    {        
-        private VlcMediaPlayer _vlcMediaPlayer;
+    {
+        private int stream;
+        private Dictionary<int, string> plugins;
+        private float volume = 1f;
+        
         private const string txtCustomRadioDefaultText = "Pegar stream url...";
         private ThumbnailToolBarButton thumbnailBtnMute;
         private ThumbnailToolBarButton thumbnailBtnStop;
@@ -27,17 +29,13 @@ namespace RadioStationApp
         {
             InitializeComponent();
 
-            var currentAssembly = Assembly.GetEntryAssembly();
-            var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
-            if (currentDirectory == null)
-                return;
+            if (!Bass.LoadMe())
+                MessageBox.Show("No se cargó la libreria Bass.");
 
-            var libDirectory = new DirectoryInfo(Path.Combine(currentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            _vlcMediaPlayer = new VlcMediaPlayer(libDirectory);
-
-            _vlcMediaPlayer.Playing += VlcMediaPlayerOnPlaying;
-            _vlcMediaPlayer.Stopped += VlcMediaPlayerOnStopped;
-            _vlcMediaPlayer.EncounteredError += VlcMediaPlayerOnEncounteredError;
+            if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
+                MessageBox.Show("No se pudo inicializar la salida de audio.");
+            
+            plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(Application.StartupPath, "addons"));
 
             thumbnailBtnMute = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
             thumbnailBtnMute.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(thumbnailBtnMute_Click);
@@ -47,46 +45,37 @@ namespace RadioStationApp
             TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, thumbnailBtnMute, thumbnailBtnStop);
         }
 
-        private void VlcMediaPlayerOnEncounteredError(object sender, VlcMediaPlayerEncounteredErrorEventArgs e)
-        {            
-            this.Invoke(new MethodInvoker(delegate ()
-            {
-                this.txtMessage.Text = "La url expiró o es incorrecta.";
-            }));
-        }
-
-        private void VlcMediaPlayerOnPlaying(object sender, VlcMediaPlayerPlayingEventArgs e)
-        {
-            this.Invoke(new MethodInvoker(delegate () {
-                this.imgEqualizer.Visible = true;
-                this.btnStopStream.Enabled = true;
-                this.thumbnailBtnStop.Enabled = true;
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
-            }));
-        }
-
-        private void VlcMediaPlayerOnStopped(object sender, VlcMediaPlayerStoppedEventArgs e)
-        {
-            this.Invoke(new MethodInvoker(delegate ()
-            {                
-                this.ResetButtonsOfRadioStreams();
-                this.imgEqualizer.Visible = false;
-                this.btnStopStream.Enabled = false;
-                this.thumbnailBtnStop.Enabled = false;
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
-                TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
-            }));
-        }
-
         private void RadioStation_Load(object sender, EventArgs e)
         {
             
         }
 
+        private void OpenRadioStream(string streamUrl, string description)
+        {
+            if (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
+                Bass.BASS_ChannelStop(stream);
+
+            stream = Bass.BASS_StreamCreateURL(streamUrl, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
+
+            if (stream != 0)
+            {
+                Bass.BASS_ChannelPlay(stream, false);
+                Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, volume);
+                txtMessage.Text = "Estás escuchando " + description;
+
+                imgEqualizer.Visible = true;
+                btnStopStream.Enabled = true;
+                thumbnailBtnStop.Enabled = true;
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
+            }
+            else
+                txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
+        }
+
         private void btnLaRed_Click(object sender, EventArgs e)
         {
-            this.SetRadio(RadioList.Radio["laRed"], "Radio LaRed AM 910");
             btnLaRed.Enabled = false;
+            OpenRadioStream(RadioCollection.Radio["laRed"], "Radio LaRed AM 910");
 
             if (!btnContinental.Enabled)
                 btnContinental.Enabled = true;
@@ -96,8 +85,8 @@ namespace RadioStationApp
 
         private void btnContinental_Click(object sender, EventArgs e)
         {
-            this.SetRadio(RadioList.Radio["continental"], "Radio Continental AM 590");
             btnContinental.Enabled = false;
+            OpenRadioStream(RadioCollection.Radio["continental"], "Radio Continental AM 590");
 
             if (!btnLaRed.Enabled)
                 btnLaRed.Enabled = true;
@@ -107,25 +96,31 @@ namespace RadioStationApp
 
         private void btnCustomRadio_Click(object sender, EventArgs e)
         {
-            this.SetRadio(txtCustomRadio.Text, "personalizada");            
-            this.ResetButtonsOfRadioStreams();
+            OpenRadioStream(txtCustomRadio.Text, "personalizada");
+            ResetButtonsOfRadioStreams();
+        }
+
+        private void StopRadioStream()
+        {
+            Bass.BASS_ChannelStop(stream);
+            txtMessage.Text = "-";
+
+            ResetButtonsOfRadioStreams();
+            imgEqualizer.Visible = false;
+            btnStopStream.Enabled = false;
+            thumbnailBtnStop.Enabled = false;
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
+            TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
         }
 
         private void btnStopStream_Click(object sender, EventArgs e)
         {
-            DoStopStream();
+            StopRadioStream();
         }
 
         private void thumbnailBtnStop_Click(object sender, ThumbnailButtonClickedEventArgs e)
         {
-            DoStopStream();
-        }
-
-        private void SetRadio(string streamUrl, string message)
-        {
-            _vlcMediaPlayer.SetMedia(streamUrl, null);
-            _vlcMediaPlayer.Play();
-            txtMessage.Text = "Estás escuchando " + message;
+            StopRadioStream();
         }
 
         private void ResetButtonsOfRadioStreams()
@@ -165,39 +160,34 @@ namespace RadioStationApp
 
         private void btnMute_Click(object sender, EventArgs e)
         {
-            DoMuteStream();
+            MuteRadioStream();
         }
 
         private void thumbnailBtnMute_Click(object sender, ThumbnailButtonClickedEventArgs e)
         {
-            DoMuteStream();
+            MuteRadioStream();
         }
 
-        private void DoMuteStream()
+        private void MuteRadioStream()
         {
-            if (_vlcMediaPlayer.State == MediaStates.Playing)
+            if (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
             {
-                if (_vlcMediaPlayer.Audio.IsMute)
+                Bass.BASS_ChannelGetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, ref volume);
+                if (volume == 0f)
                 {
                     btnMute.Image = Properties.Resources.speaker_v2;
                     thumbnailBtnMute.Icon = Properties.Resources.speaker_icon;
                     thumbnailBtnMute.Tooltip = "Silenciar";
-                    _vlcMediaPlayer.Audio.IsMute = false;
+                    Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, volume = 1f);
                 }
                 else
                 {
                     btnMute.Image = Properties.Resources.speaker_mute_v2;
                     thumbnailBtnMute.Icon = Properties.Resources.speaker_mute_icon;
                     thumbnailBtnMute.Tooltip = "Encender";
-                    _vlcMediaPlayer.Audio.IsMute = true;
+                    Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, volume = 0f);
                 }
             }
-        }
-
-        private void DoStopStream()
-        {
-            _vlcMediaPlayer.Stop();
-            this.txtMessage.Text = "-";
         }
 
         private void aboutItem_Click(object sender, EventArgs e)
@@ -230,7 +220,7 @@ namespace RadioStationApp
                 item.Checked = false;
             });
 
-            this.SetRadio(RadioList.Radio[currentMenuItem.Name], currentMenuItem.Text);
+            OpenRadioStream(RadioCollection.Radio[currentMenuItem.Name], currentMenuItem.Text);
             currentMenuItem.Enabled = false;
             btnLaRed.Enabled = btnContinental.Enabled = true;
         }
@@ -244,6 +234,15 @@ namespace RadioStationApp
                 item.Enabled = true;
                 item.Checked = false;
             });
+        }
+
+        private void RadioStation_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Bass.BASS_StreamFree(stream);
+            Bass.BASS_Free();
+
+            foreach (int plugin in plugins.Keys)
+                Bass.BASS_PluginFree(plugin);
         }
     }
 }
