@@ -43,14 +43,13 @@
             this.btnStopStream = new System.Windows.Forms.Button();
             this.cmsRadiosPopup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.metro951 = new System.Windows.Forms.ToolStripMenuItem();
-            this.radio10 = new System.Windows.Forms.ToolStripMenuItem();
             this.radioMitre = new System.Windows.Forms.ToolStripMenuItem();
             this.vorterix = new System.Windows.Forms.ToolStripMenuItem();
             this.delPlataAM1030 = new System.Windows.Forms.ToolStripMenuItem();
             this.elDestape = new System.Windows.Forms.ToolStripMenuItem();
             this.radioRivadaviaAM630 = new System.Windows.Forms.ToolStripMenuItem();
             this.radioLatinaFM1011 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cNNRadioArgentina = new System.Windows.Forms.ToolStripMenuItem();
+            this.cnnRadioArgentina = new System.Windows.Forms.ToolStripMenuItem();
             this.separatorItem = new System.Windows.Forms.ToolStripSeparator();
             this.aboutItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tltGeneral = new System.Windows.Forms.ToolTip(this.components);
@@ -185,19 +184,18 @@
             // 
             this.cmsRadiosPopup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.metro951,
-            this.radio10,
             this.radioMitre,
             this.vorterix,
             this.delPlataAM1030,
             this.elDestape,
             this.radioRivadaviaAM630,
             this.radioLatinaFM1011,
-            this.cNNRadioArgentina,
+            this.cnnRadioArgentina,
             this.separatorItem,
             this.aboutItem});
             this.cmsRadiosPopup.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.cmsRadiosPopup.Name = "cmsRadiosPopup";
-            this.cmsRadiosPopup.Size = new System.Drawing.Size(201, 230);
+            this.cmsRadiosPopup.Size = new System.Drawing.Size(201, 208);
             // 
             // metro951
             // 
@@ -207,15 +205,6 @@
             this.metro951.Size = new System.Drawing.Size(200, 22);
             this.metro951.Text = "Metro 95.1";
             this.metro951.Click += new System.EventHandler(this.RadiosItem_Click);
-            // 
-            // radio10
-            // 
-            this.radio10.CheckOnClick = true;
-            this.radio10.Image = global::RadioStationApp.Properties.Resources.radio10;
-            this.radio10.Name = "radio10";
-            this.radio10.Size = new System.Drawing.Size(200, 22);
-            this.radio10.Text = "Radio 10";
-            this.radio10.Click += new System.EventHandler(this.RadiosItem_Click);
             // 
             // radioMitre
             // 
@@ -271,14 +260,14 @@
             this.radioLatinaFM1011.Text = "Radio Latina FM 101.1";
             this.radioLatinaFM1011.Click += new System.EventHandler(this.RadiosItem_Click);
             // 
-            // cNNRadioArgentina
+            // cnnRadioArgentina
             // 
-            this.cNNRadioArgentina.CheckOnClick = true;
-            this.cNNRadioArgentina.Image = global::RadioStationApp.Properties.Resources.cnn_radio_argentina;
-            this.cNNRadioArgentina.Name = "cNNRadioArgentina";
-            this.cNNRadioArgentina.Size = new System.Drawing.Size(200, 22);
-            this.cNNRadioArgentina.Text = "CNN Radio Argentina";
-            this.cNNRadioArgentina.Click += new System.EventHandler(this.RadiosItem_Click);
+            this.cnnRadioArgentina.CheckOnClick = true;
+            this.cnnRadioArgentina.Image = global::RadioStationApp.Properties.Resources.cnn_radio_argentina;
+            this.cnnRadioArgentina.Name = "cnnRadioArgentina";
+            this.cnnRadioArgentina.Size = new System.Drawing.Size(200, 22);
+            this.cnnRadioArgentina.Text = "CNN Radio Argentina";
+            this.cnnRadioArgentina.Click += new System.EventHandler(this.RadiosItem_Click);
             // 
             // separatorItem
             // 
@@ -313,6 +302,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "RadioStation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Estación de radio";
@@ -342,14 +332,13 @@
         private System.Windows.Forms.Button btnMute;
         private System.Windows.Forms.ContextMenuStrip cmsRadiosPopup;
         private System.Windows.Forms.ToolStripMenuItem metro951;
-        private System.Windows.Forms.ToolStripMenuItem radio10;
         private System.Windows.Forms.ToolStripMenuItem radioMitre;
         private System.Windows.Forms.ToolStripMenuItem vorterix;
         private System.Windows.Forms.ToolStripMenuItem delPlataAM1030;
         private System.Windows.Forms.ToolStripMenuItem elDestape;
         private System.Windows.Forms.ToolStripMenuItem radioRivadaviaAM630;
         private System.Windows.Forms.ToolStripMenuItem radioLatinaFM1011;
-        private System.Windows.Forms.ToolStripMenuItem cNNRadioArgentina;
+        private System.Windows.Forms.ToolStripMenuItem cnnRadioArgentina;
         private System.Windows.Forms.ToolStripSeparator separatorItem;
         private System.Windows.Forms.ToolStripMenuItem aboutItem;
         private System.Windows.Forms.ToolTip tltGeneral;

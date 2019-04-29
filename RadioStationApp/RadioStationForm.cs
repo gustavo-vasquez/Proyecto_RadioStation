@@ -17,32 +17,18 @@ namespace RadioStationApp
 {
     public partial class RadioStation : Form
     {
-        private int stream;
-        private Dictionary<int, string> plugins;
-        private float volume = 1f;
-        
-        private const string txtCustomRadioDefaultText = "Pegar stream url...";
-        private ThumbnailToolBarButton thumbnailBtnMute;
-        private ThumbnailToolBarButton thumbnailBtnStop;
+        private int _stream;
+        private Dictionary<int, string> _plugins;
+        private float _volume = 1f;
+        private const string _customRadioPlaceHolder = "Pegar stream url...";
+        private ThumbnailToolBarButton muteThumbnailButton;
+        private ThumbnailToolBarButton stopThumbnailButton;
 
         public RadioStation()
         {
             InitializeComponent();
-
-            if (!Bass.LoadMe())
-                MessageBox.Show("No se cargó la libreria Bass.");
-
-            if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
-                MessageBox.Show("No se pudo inicializar la salida de audio.");
-            
-            plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(Application.StartupPath, "addons"));
-
-            thumbnailBtnMute = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
-            thumbnailBtnMute.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(thumbnailBtnMute_Click);
-            thumbnailBtnStop = new ThumbnailToolBarButton(Properties.Resources.stop_icon, "Detener");
-            thumbnailBtnStop.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(btnStopStream_Click);
-            thumbnailBtnStop.Enabled = false;
-            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, thumbnailBtnMute, thumbnailBtnStop);
+            InitializeBASSLibrary(true);
+            CreateThumbnailControls();
         }
 
         private void RadioStation_Load(object sender, EventArgs e)
@@ -50,32 +36,10 @@ namespace RadioStationApp
             
         }
 
-        private void OpenRadioStream(string streamUrl, string description)
-        {
-            if (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
-                Bass.BASS_ChannelStop(stream);
-
-            stream = Bass.BASS_StreamCreateURL(streamUrl, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
-
-            if (stream != 0)
-            {
-                Bass.BASS_ChannelPlay(stream, false);
-                Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, volume);
-                txtMessage.Text = "Estás escuchando " + description;
-
-                imgEqualizer.Visible = true;
-                btnStopStream.Enabled = true;
-                thumbnailBtnStop.Enabled = true;
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
-            }
-            else
-                txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
-        }
-
         private void btnLaRed_Click(object sender, EventArgs e)
         {
+            PlayRadioStream(RadioGroup.Radio["laRed"], "Radio LaRed AM 910");
             btnLaRed.Enabled = false;
-            OpenRadioStream(RadioCollection.Radio["laRed"], "Radio LaRed AM 910");
 
             if (!btnContinental.Enabled)
                 btnContinental.Enabled = true;
@@ -85,8 +49,8 @@ namespace RadioStationApp
 
         private void btnContinental_Click(object sender, EventArgs e)
         {
+            PlayRadioStream(RadioGroup.Radio["continental"], "Radio Continental AM 590");
             btnContinental.Enabled = false;
-            OpenRadioStream(RadioCollection.Radio["continental"], "Radio Continental AM 590");
 
             if (!btnLaRed.Enabled)
                 btnLaRed.Enabled = true;
@@ -96,29 +60,11 @@ namespace RadioStationApp
 
         private void btnCustomRadio_Click(object sender, EventArgs e)
         {
-            OpenRadioStream(txtCustomRadio.Text, "personalizada");
+            PlayRadioStream(txtCustomRadio.Text, "personalizada");
             ResetButtonsOfRadioStreams();
-        }
-
-        private void StopRadioStream()
-        {
-            Bass.BASS_ChannelStop(stream);
-            txtMessage.Text = "-";
-
-            ResetButtonsOfRadioStreams();
-            imgEqualizer.Visible = false;
-            btnStopStream.Enabled = false;
-            thumbnailBtnStop.Enabled = false;
-            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
-            TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
         }
 
         private void btnStopStream_Click(object sender, EventArgs e)
-        {
-            StopRadioStream();
-        }
-
-        private void thumbnailBtnStop_Click(object sender, ThumbnailButtonClickedEventArgs e)
         {
             StopRadioStream();
         }
@@ -136,13 +82,13 @@ namespace RadioStationApp
 
         private void btnRadios_Click(object sender, EventArgs e)
         {
-            Button buttonMenu = sender as Button;
-            cmsRadiosPopup.Show(buttonMenu, new Point(0, 0));
+            Button menuButton = sender as Button;
+            cmsRadiosPopup.Show(menuButton, new Point(0, 0));
         }
 
         private void txtCustomRadio_Enter(object sender, EventArgs e)
         {
-            if (txtCustomRadio.Text.Equals(txtCustomRadioDefaultText))
+            if (txtCustomRadio.Text.Equals(_customRadioPlaceHolder))
             {
                 txtCustomRadio.Text = string.Empty;
                 txtCustomRadio.ForeColor = SystemColors.WindowText;
@@ -153,7 +99,7 @@ namespace RadioStationApp
         {
             if (string.IsNullOrEmpty(txtCustomRadio.Text))
             {
-                txtCustomRadio.Text = txtCustomRadioDefaultText;
+                txtCustomRadio.Text = _customRadioPlaceHolder;
                 txtCustomRadio.ForeColor = SystemColors.GrayText;
             }
         }
@@ -161,33 +107,6 @@ namespace RadioStationApp
         private void btnMute_Click(object sender, EventArgs e)
         {
             MuteRadioStream();
-        }
-
-        private void thumbnailBtnMute_Click(object sender, ThumbnailButtonClickedEventArgs e)
-        {
-            MuteRadioStream();
-        }
-
-        private void MuteRadioStream()
-        {
-            if (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
-            {
-                Bass.BASS_ChannelGetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, ref volume);
-                if (volume == 0f)
-                {
-                    btnMute.Image = Properties.Resources.speaker_v2;
-                    thumbnailBtnMute.Icon = Properties.Resources.speaker_icon;
-                    thumbnailBtnMute.Tooltip = "Silenciar";
-                    Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, volume = 1f);
-                }
-                else
-                {
-                    btnMute.Image = Properties.Resources.speaker_mute_v2;
-                    thumbnailBtnMute.Icon = Properties.Resources.speaker_mute_icon;
-                    thumbnailBtnMute.Tooltip = "Encender";
-                    Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, volume = 0f);
-                }
-            }
         }
 
         private void aboutItem_Click(object sender, EventArgs e)
@@ -220,7 +139,7 @@ namespace RadioStationApp
                 item.Checked = false;
             });
 
-            OpenRadioStream(RadioCollection.Radio[currentMenuItem.Name], currentMenuItem.Text);
+            PlayRadioStream(RadioGroup.Radio[currentMenuItem.Name], currentMenuItem.Text);
             currentMenuItem.Enabled = false;
             btnLaRed.Enabled = btnContinental.Enabled = true;
         }
@@ -238,11 +157,102 @@ namespace RadioStationApp
 
         private void RadioStation_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Bass.BASS_StreamFree(stream);
+            FreeBASSResources();
+        }
+
+        #region LIBRARY RESOURCES
+
+        private void InitializeBASSLibrary(bool enablePlugins)
+        {
+            if (!Bass.LoadMe())
+                MessageBox.Show("No se cargó la libreria Bass.");
+
+            if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
+                MessageBox.Show("No se pudo inicializar la salida de audio.");
+
+            if (enablePlugins)
+                _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(Application.StartupPath, "addons"));
+        }
+
+        private void FreeBASSResources()
+        {
+            Bass.BASS_StreamFree(_stream);
             Bass.BASS_Free();
 
-            foreach (int plugin in plugins.Keys)
-                Bass.BASS_PluginFree(plugin);
+            if (_plugins != null)
+                foreach (int plugin in _plugins.Keys)
+                    Bass.BASS_PluginFree(plugin);
         }
+
+        #endregion
+
+        private void CreateThumbnailControls()
+        {
+            muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
+            muteThumbnailButton.Click += (sender, args) => { MuteRadioStream(); };
+
+            stopThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.stop_icon, "Detener");
+            stopThumbnailButton.Click += (sender, args) => { StopRadioStream(); };
+
+            stopThumbnailButton.Enabled = false;
+            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, stopThumbnailButton);
+        }
+
+        #region STREAM ACTIONS
+
+        private void PlayRadioStream(string streamUrl, string description)
+        {
+            if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
+                StopRadioStream();
+
+            _stream = Bass.BASS_StreamCreateURL(streamUrl, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
+
+            if (_stream != 0)
+            {
+                Bass.BASS_ChannelPlay(_stream, false);
+                Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume);
+
+                txtMessage.Text = "Estás escuchando " + description;
+                imgEqualizer.Visible = btnStopStream.Enabled = stopThumbnailButton.Enabled = true;
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
+            }
+            else
+                txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
+        }
+
+        private void StopRadioStream()
+        {
+            Bass.BASS_ChannelStop(_stream);
+
+            txtMessage.Text = "-";
+            ResetButtonsOfRadioStreams();
+            imgEqualizer.Visible = btnStopStream.Enabled = stopThumbnailButton.Enabled = false;
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
+            TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
+        }
+
+        private void MuteRadioStream()
+        {
+            if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
+            {
+                Bass.BASS_ChannelGetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, ref _volume);
+                if (_volume == 0f)
+                {
+                    btnMute.Image = Properties.Resources.speaker_v2;
+                    muteThumbnailButton.Icon = Properties.Resources.speaker_icon;
+                    muteThumbnailButton.Tooltip = "Silenciar";
+                    Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 1f);
+                }
+                else
+                {
+                    btnMute.Image = Properties.Resources.speaker_mute_v2;
+                    muteThumbnailButton.Icon = Properties.Resources.speaker_mute_icon;
+                    muteThumbnailButton.Tooltip = "Encender";
+                    Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 0f);
+                }
+            }
+        }
+
+        #endregion
     }
 }
