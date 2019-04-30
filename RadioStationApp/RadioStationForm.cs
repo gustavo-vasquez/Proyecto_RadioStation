@@ -17,6 +17,7 @@ namespace RadioStationApp
 {
     public partial class RadioStation : Form
     {
+        private string[] _args = Environment.GetCommandLineArgs();
         private int _stream;
         private Dictionary<int, string> _plugins;
         private float _volume = 1f;
@@ -33,12 +34,12 @@ namespace RadioStationApp
 
         private void RadioStation_Load(object sender, EventArgs e)
         {
-            
+            CheckLineArguments();
         }
 
         private void btnLaRed_Click(object sender, EventArgs e)
-        {
-            PlayRadioStream(RadioGroup.Radio["laRed"], "Radio LaRed AM 910");
+        {   
+            PlayRadioStream(RadioGroup.Stations["laRed"].Url, RadioGroup.Stations["laRed"].Description);
             btnLaRed.Enabled = false;
 
             if (!btnContinental.Enabled)
@@ -49,7 +50,7 @@ namespace RadioStationApp
 
         private void btnContinental_Click(object sender, EventArgs e)
         {
-            PlayRadioStream(RadioGroup.Radio["continental"], "Radio Continental AM 590");
+            PlayRadioStream(RadioGroup.Stations["continental"].Url, RadioGroup.Stations["continental"].Description);
             btnContinental.Enabled = false;
 
             if (!btnLaRed.Enabled)
@@ -139,7 +140,7 @@ namespace RadioStationApp
                 item.Checked = false;
             });
 
-            PlayRadioStream(RadioGroup.Radio[currentMenuItem.Name], currentMenuItem.Text);
+            PlayRadioStream(RadioGroup.Stations[currentMenuItem.Name].Url, RadioGroup.Stations[currentMenuItem.Name].Description);
             currentMenuItem.Enabled = false;
             btnLaRed.Enabled = btnContinental.Enabled = true;
         }
@@ -196,6 +197,65 @@ namespace RadioStationApp
 
             stopThumbnailButton.Enabled = false;
             TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, stopThumbnailButton);
+
+            JumpList jumplist = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, IntPtr.Zero);
+            JumpListCustomCategory category = new JumpListCustomCategory("Radios");
+            List<JumpListLink> items = new List<JumpListLink>();
+
+            foreach (KeyValuePair<string, RadioData> radio in RadioGroup.Stations)
+            {
+                items.Add(new JumpListLink(Assembly.GetEntryAssembly().Location, radio.Value.Description)
+                {
+                    IconReference = new Microsoft.WindowsAPICodePack.Shell.IconReference(radio.Value.Icon, 0),
+                    Arguments = "-" + radio.Value.Name
+                });
+            }
+
+            category.AddJumpListItems(items.ToArray());
+            jumplist.AddCustomCategories(category);
+            jumplist.Refresh();
+        }
+
+        private void CheckLineArguments()
+        {
+            if (_args.Length > 1)
+            {
+                switch (_args[1])
+                {
+                    case "-laRed":
+                        btnLaRed.PerformClick();
+                        break;
+                    case "-continental":
+                        btnContinental.PerformClick();
+                        break;
+                    case "-metro":
+                        cmsRadiosPopup.Items[0].PerformClick();
+                        break;
+                    case "-radioMitre":
+                        cmsRadiosPopup.Items[1].PerformClick();
+                        break;
+                    case "-vorterix":
+                        cmsRadiosPopup.Items[2].PerformClick();
+                        break;
+                    case "-delPlata":
+                        cmsRadiosPopup.Items[3].PerformClick();
+                        break;
+                    case "-elDestape":
+                        cmsRadiosPopup.Items[4].PerformClick();
+                        break;
+                    case "-radioRivadavia":
+                        cmsRadiosPopup.Items[5].PerformClick();
+                        break;
+                    case "-radioLatina":
+                        cmsRadiosPopup.Items[6].PerformClick();
+                        break;
+                    case "-cnnRadioArgentina":
+                        cmsRadiosPopup.Items[7].PerformClick();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         #region STREAM ACTIONS

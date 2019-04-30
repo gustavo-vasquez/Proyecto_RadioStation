@@ -33,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>resources\RadioStation.ico</ApplicationIcon>
@@ -145,15 +146,16 @@
     <Content Include="bass\mp3-free\bass.dll" />
     <Content Include="bass\lib\addons\bass_ofr.dll" />
     <Content Include="bass\lib\OptimFROG.dll" />
-    <Content Include="resources\icons\radios\cnn_radio_argentina.png" />
-    <Content Include="resources\icons\radios\del_plata_am1030.png" />
-    <Content Include="resources\icons\radios\el_destape.png" />
-    <Content Include="resources\icons\radios\metro95.1.png" />
-    <Content Include="resources\icons\radios\radio10.png" />
-    <Content Include="resources\icons\radios\radio_latina_fm101.1.png" />
-    <Content Include="resources\icons\radios\radio_mitre.png" />
-    <Content Include="resources\icons\radios\radio_rivadavia_am630.png" />
-    <Content Include="resources\icons\radios\vorterix.png" />
+    <Content Include="resources\icons\radios\delPlata.ico" />
+    <Content Include="resources\icons\radios\continental.ico" />
+    <Content Include="resources\icons\radios\cnnRadioArgentina.ico" />
+    <Content Include="resources\icons\radios\radioLatina.ico" />
+    <Content Include="resources\icons\radios\laRed.ico" />
+    <Content Include="resources\icons\radios\metro.ico" />
+    <Content Include="resources\icons\radios\radioMitre.ico" />
+    <Content Include="resources\icons\radios\vorterix.ico" />
+    <Content Include="resources\icons\radios\elDestape.ico" />
+    <Content Include="resources\icons\radios\radioRivadavia.ico" />
     <Content Include="resources\icons\thumbnails\speaker_icon.ico" />
     <Content Include="resources\icons\thumbnails\speaker_mute_icon.ico" />
     <Content Include="resources\icons\thumbnails\stop_icon.ico" />
