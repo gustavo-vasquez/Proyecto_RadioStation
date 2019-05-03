@@ -29,7 +29,7 @@ namespace RadioStationApp
         {
             InitializeComponent();
             InitializeBASSLibrary(true);
-            CreateThumbnailControls();
+            InitializeTaskbarControls();
         }
 
         private void RadioStation_Load(object sender, EventArgs e)
@@ -187,12 +187,12 @@ namespace RadioStationApp
 
         #endregion
 
-        private void CreateThumbnailControls()
+        private void InitializeTaskbarControls()
         {
-            muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker_icon, "Silenciar");
+            muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker, "Silenciar");
             muteThumbnailButton.Click += (sender, args) => { MuteRadioStream(); };
 
-            stopThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.stop_icon, "Detener");
+            stopThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.stop, "Detener");
             stopThumbnailButton.Click += (sender, args) => { StopRadioStream(); };
 
             stopThumbnailButton.Enabled = false;
@@ -275,6 +275,7 @@ namespace RadioStationApp
                 txtMessage.Text = "Estás escuchando " + description;
                 imgEqualizer.Visible = btnStopStream.Enabled = stopThumbnailButton.Enabled = true;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
+                TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.play_status, "streaming");
             }
             else
                 txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
@@ -287,6 +288,7 @@ namespace RadioStationApp
             txtMessage.Text = "-";
             ResetButtonsOfRadioStreams();
             imgEqualizer.Visible = btnStopStream.Enabled = stopThumbnailButton.Enabled = false;
+            TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.stop_status, "Stop");
             TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
             TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
         }
@@ -298,15 +300,15 @@ namespace RadioStationApp
                 Bass.BASS_ChannelGetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, ref _volume);
                 if (_volume == 0f)
                 {
-                    btnMute.Image = Properties.Resources.speaker_v2;
-                    muteThumbnailButton.Icon = Properties.Resources.speaker_icon;
+                    btnMute.Image = Properties.Resources.speaker_button;
+                    muteThumbnailButton.Icon = Properties.Resources.speaker;
                     muteThumbnailButton.Tooltip = "Silenciar";
                     Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 1f);
                 }
                 else
                 {
-                    btnMute.Image = Properties.Resources.speaker_mute_v2;
-                    muteThumbnailButton.Icon = Properties.Resources.speaker_mute_icon;
+                    btnMute.Image = Properties.Resources.speaker_mute_button;
+                    muteThumbnailButton.Icon = Properties.Resources.speaker_mute;
                     muteThumbnailButton.Tooltip = "Encender";
                     Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 0f);
                 }

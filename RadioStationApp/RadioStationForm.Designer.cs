@@ -113,7 +113,7 @@
             // 
             // btnMute
             // 
-            this.btnMute.Image = global::RadioStationApp.Properties.Resources.speaker_v2;
+            this.btnMute.Image = global::RadioStationApp.Properties.Resources.speaker_button;
             this.btnMute.Location = new System.Drawing.Point(224, 226);
             this.btnMute.Name = "btnMute";
             this.btnMute.Size = new System.Drawing.Size(48, 23);
@@ -169,7 +169,7 @@
             // btnStopStream
             // 
             this.btnStopStream.Enabled = false;
-            this.btnStopStream.Image = global::RadioStationApp.Properties.Resources.stop;
+            this.btnStopStream.Image = global::RadioStationApp.Properties.Resources.stop_button;
             this.btnStopStream.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStopStream.Location = new System.Drawing.Point(75, 226);
             this.btnStopStream.Name = "btnStopStream";

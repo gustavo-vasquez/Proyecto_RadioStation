@@ -81,21 +81,21 @@ namespace RadioStationApp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Bitmap speaker {
+        internal static System.Drawing.Icon play_status {
+            get {
+                object obj = ResourceManager.GetObject("play_status", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon speaker {
             get {
                 object obj = ResourceManager.GetObject("speaker", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon speaker_icon {
-            get {
-                object obj = ResourceManager.GetObject("speaker_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -103,19 +103,29 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap speaker_mute {
+        internal static System.Drawing.Bitmap speaker_alternative {
+            get {
+                object obj = ResourceManager.GetObject("speaker_alternative", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speaker_button {
+            get {
+                object obj = ResourceManager.GetObject("speaker_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon speaker_mute {
             get {
                 object obj = ResourceManager.GetObject("speaker_mute", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon speaker_mute_icon {
-            get {
-                object obj = ResourceManager.GetObject("speaker_mute_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -123,9 +133,9 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap speaker_mute_v2 {
+        internal static System.Drawing.Bitmap speaker_mute_alternative {
             get {
-                object obj = ResourceManager.GetObject("speaker_mute_v2", resourceCulture);
+                object obj = ResourceManager.GetObject("speaker_mute_alternative", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,19 +143,9 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap speaker_v2 {
+        internal static System.Drawing.Bitmap speaker_mute_button {
             get {
-                object obj = ResourceManager.GetObject("speaker_v2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap stop {
-            get {
-                object obj = ResourceManager.GetObject("stop", resourceCulture);
+                object obj = ResourceManager.GetObject("speaker_mute_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,29 @@ namespace RadioStationApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon stop_icon {
+        internal static System.Drawing.Icon stop {
             get {
-                object obj = ResourceManager.GetObject("stop_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("stop", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop_button {
+            get {
+                object obj = ResourceManager.GetObject("stop_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon stop_status {
+            get {
+                object obj = ResourceManager.GetObject("stop_status", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

@@ -69,6 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProjectInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RadioGroup.cs" />
     <Compile Include="RadioStationForm.cs">
       <SubType>Form</SubType>
@@ -83,14 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="bass.NET\Help\BassNet.chm" />
     <None Include="bass.NET\LICENSE.rtf" />
     <None Include="bass\bass.chm" />
@@ -156,16 +156,20 @@
     <Content Include="resources\icons\radios\vorterix.ico" />
     <Content Include="resources\icons\radios\elDestape.ico" />
     <Content Include="resources\icons\radios\radioRivadavia.ico" />
-    <Content Include="resources\icons\thumbnails\speaker_icon.ico" />
-    <Content Include="resources\icons\thumbnails\speaker_mute_icon.ico" />
-    <Content Include="resources\icons\thumbnails\stop_icon.ico" />
+    <Content Include="resources\icons\taskbar\play_status.ico" />
+    <Content Include="resources\icons\taskbar\stop_status.ico" />
+    <Content Include="resources\icons\thumbnails\speaker.ico" />
+    <Content Include="resources\icons\thumbnails\speaker_mute.ico" />
+    <Content Include="resources\icons\thumbnails\stop.ico" />
     <Content Include="resources\images\buttons\online_radio.png" />
+    <Content Include="resources\images\buttons\stop_alternative.png" />
+    <Content Include="resources\images\buttons\stop_alternative_2.png" />
     <Content Include="resources\images\buttons\wave_signal.png" />
-    <Content Include="resources\images\buttons\speaker_v2.png" />
-    <Content Include="resources\images\buttons\speaker_mute_v2.png" />
-    <Content Include="resources\images\buttons\info.png" />
     <Content Include="resources\images\buttons\speaker.png" />
     <Content Include="resources\images\buttons\speaker_mute.png" />
+    <Content Include="resources\images\buttons\info.png" />
+    <Content Include="resources\images\buttons\speaker_alternative.png" />
+    <Content Include="resources\images\buttons\speaker_mute_alternative.png" />
     <Content Include="resources\images\buttons\stop.png" />
     <Content Include="resources\images\equalizer.gif" />
     <Content Include="resources\images\Radio_LaRed_AM_910.jpg" />
