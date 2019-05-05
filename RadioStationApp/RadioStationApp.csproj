@@ -33,10 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>resources\RadioStation.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\RadioStation.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bass.Net, Version=2.4.14.0, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
@@ -69,12 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProjectInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="RadioGroup.cs" />
+    <Compile Include="RadioCollection.cs" />
     <Compile Include="RadioStationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,12 +82,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="bass.NET\Help\BassNet.chm" />
-    <None Include="bass.NET\LICENSE.rtf" />
-    <None Include="bass\bass.chm" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Bass.NET\Help\BassNet.chm" />
+    <None Include="Bass.NET\LICENSE.rtf" />
+    <None Include="Bass\bass.chm" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -110,76 +109,68 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="bass.NET\readme.txt" />
-    <Content Include="bass.NET\v4.5\Bass.Net.dll" />
-    <Content Include="bass.NET\v4.5\Bass.Net.xml" />
-    <Content Include="bass\lib\addons\bassalac.dll" />
-    <Content Include="bass\lib\addons\bassdsd.dll" />
-    <Content Include="bass\lib\addons\bassflac.dll" />
-    <Content Include="bass\lib\addons\basshls.dll" />
-    <Content Include="bass\lib\addons\bassmidi.dll" />
-    <Content Include="bass\lib\addons\bassmix.dll" />
-    <Content Include="bass\lib\addons\bassopus.dll" />
-    <Content Include="bass\lib\addons\basswasapi.dll" />
-    <Content Include="bass\lib\addons\basswma.dll" />
-    <Content Include="bass\lib\addons\basswv.dll" />
-    <Content Include="bass\lib\addons\bass_aac.dll" />
-    <Content Include="bass\lib\addons\bass_ac3.dll" />
-    <Content Include="bass\lib\addons\bass_adx.dll" />
-    <Content Include="bass\lib\addons\bass_aix.dll" />
-    <Content Include="bass\lib\addons\bass_ape.dll" />
-    <Content Include="bass\lib\addons\bass_fx.dll" />
-    <Content Include="bass\lib\addons\bass_mpc.dll" />
-    <Content Include="bass\lib\addons\bass_spx.dll" />
-    <Content Include="bass\lib\addons\bass_tta.dll" />
-    <Content Include="bass\lib\addons\bass_vst.dll" />
-    <Content Include="bass\lib\addons\bass_wadsp.dll" />
-    <Content Include="bass\lib\addons\bass_winamp.dll" />
-    <Content Include="bass\lib\addons\tags.dll" />
-    <Content Include="bass\lib\bass.dll" />
-    <Content Include="bass\bass.txt" />
-    <Content Include="bass\lib\bassenc.dll" />
-    <Content Include="bass\lib\addons\bassenc_flac.dll" />
-    <Content Include="bass\lib\addons\bassenc_mp3.dll" />
-    <Content Include="bass\lib\addons\bassenc_ogg.dll" />
-    <Content Include="bass\lib\addons\bassenc_opus.dll" />
-    <Content Include="bass\mp3-free\bass.dll" />
-    <Content Include="bass\lib\addons\bass_ofr.dll" />
-    <Content Include="bass\lib\OptimFROG.dll" />
-    <Content Include="resources\icons\radios\delPlata.ico" />
-    <Content Include="resources\icons\radios\continental.ico" />
-    <Content Include="resources\icons\radios\cnnRadioArgentina.ico" />
-    <Content Include="resources\icons\radios\radioLatina.ico" />
-    <Content Include="resources\icons\radios\laRed.ico" />
-    <Content Include="resources\icons\radios\metro.ico" />
-    <Content Include="resources\icons\radios\radioMitre.ico" />
-    <Content Include="resources\icons\radios\vorterix.ico" />
-    <Content Include="resources\icons\radios\elDestape.ico" />
-    <Content Include="resources\icons\radios\radioRivadavia.ico" />
-    <Content Include="resources\icons\taskbar\play_status.ico" />
-    <Content Include="resources\icons\taskbar\stop_status.ico" />
-    <Content Include="resources\icons\thumbnails\speaker.ico" />
-    <Content Include="resources\icons\thumbnails\speaker_mute.ico" />
-    <Content Include="resources\icons\thumbnails\stop.ico" />
-    <Content Include="resources\images\buttons\online_radio.png" />
-    <Content Include="resources\images\buttons\stop_alternative.png" />
-    <Content Include="resources\images\buttons\stop_alternative_2.png" />
-    <Content Include="resources\images\buttons\wave_signal.png" />
-    <Content Include="resources\images\buttons\speaker.png" />
-    <Content Include="resources\images\buttons\speaker_mute.png" />
-    <Content Include="resources\images\buttons\info.png" />
-    <Content Include="resources\images\buttons\speaker_alternative.png" />
-    <Content Include="resources\images\buttons\speaker_mute_alternative.png" />
-    <Content Include="resources\images\buttons\stop.png" />
-    <Content Include="resources\images\equalizer.gif" />
-    <Content Include="resources\images\Radio_LaRed_AM_910.jpg" />
-    <Content Include="resources\images\Radio_Continental_AM_590.png" />
-    <Content Include="resources\RadioStation.ico" />
+    <Content Include="Bass.NET\readme.txt" />
+    <Content Include="Bass.NET\v4.5\Bass.Net.dll" />
+    <Content Include="Bass.NET\v4.5\Bass.Net.xml" />
+    <Content Include="Bass\addons\bassalac.dll" />
+    <Content Include="Bass\addons\bassdsd.dll" />
+    <Content Include="Bass\addons\bassflac.dll" />
+    <Content Include="Bass\addons\basshls.dll" />
+    <Content Include="Bass\addons\bassmidi.dll" />
+    <Content Include="Bass\addons\bassmix.dll" />
+    <Content Include="Bass\addons\bassopus.dll" />
+    <Content Include="Bass\addons\basswasapi.dll" />
+    <Content Include="Bass\addons\basswma.dll" />
+    <Content Include="Bass\addons\basswv.dll" />
+    <Content Include="Bass\addons\bass_aac.dll" />
+    <Content Include="Bass\addons\bass_ac3.dll" />
+    <Content Include="Bass\addons\bass_adx.dll" />
+    <Content Include="Bass\addons\bass_aix.dll" />
+    <Content Include="Bass\addons\bass_ape.dll" />
+    <Content Include="Bass\addons\bass_fx.dll" />
+    <Content Include="Bass\addons\bass_mpc.dll" />
+    <Content Include="Bass\addons\bass_spx.dll" />
+    <Content Include="Bass\addons\bass_tta.dll" />
+    <Content Include="Bass\addons\bass_vst.dll" />
+    <Content Include="Bass\addons\bass_wadsp.dll" />
+    <Content Include="Bass\addons\bass_winamp.dll" />
+    <Content Include="Bass\addons\tags.dll" />
+    <Content Include="Bass\bass.dll" />
+    <Content Include="Bass\bass.txt" />
+    <Content Include="Bass\bassenc\bassenc.dll" />
+    <Content Include="Bass\bassenc\bassenc_flac.dll" />
+    <Content Include="Bass\bassenc\bassenc_mp3.dll" />
+    <Content Include="Bass\bassenc\bassenc_ogg.dll" />
+    <Content Include="Bass\bassenc\bassenc_opus.dll" />
+    <Content Include="Bass\mp3-free\bass.dll" />
+    <Content Include="Bass\OptimFROG\bass_ofr.dll" />
+    <Content Include="Bass\OptimFROG\OptimFROG.dll" />
+    <Content Include="Resources\icons\radios\cnn_radio_argentina.png" />
+    <Content Include="Resources\icons\radios\del_plata_am1030.png" />
+    <Content Include="Resources\icons\radios\el_destape.png" />
+    <Content Include="Resources\icons\radios\metro95.1.png" />
+    <Content Include="Resources\icons\radios\radio10.png" />
+    <Content Include="Resources\icons\radios\radio_latina_fm101.1.png" />
+    <Content Include="Resources\icons\radios\radio_mitre.png" />
+    <Content Include="Resources\icons\radios\radio_rivadavia_am630.png" />
+    <Content Include="Resources\icons\radios\vorterix.png" />
+    <Content Include="Resources\icons\thumbnails\speaker_icon.ico" />
+    <Content Include="Resources\icons\thumbnails\speaker_mute_icon.ico" />
+    <Content Include="Resources\icons\thumbnails\stop_icon.ico" />
+    <Content Include="Resources\images\buttons\online_radio.png" />
+    <Content Include="Resources\images\buttons\wave_signal.png" />
+    <Content Include="Resources\images\buttons\speaker_v2.png" />
+    <Content Include="Resources\images\buttons\speaker_mute_v2.png" />
+    <Content Include="Resources\images\buttons\info.png" />
+    <Content Include="Resources\images\buttons\speaker.png" />
+    <Content Include="Resources\images\buttons\speaker_mute.png" />
+    <Content Include="Resources\images\buttons\stop.png" />
+    <Content Include="Resources\images\equalizer.gif" />
+    <Content Include="Resources\images\Radio_LaRed_AM_910.jpg" />
+    <Content Include="Resources\images\Radio_Continental_AM_590.png" />
+    <Content Include="Resources\RadioStation.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy.exe /D /S /Y "$(ProjectDir)bass\lib\*.*" "$(TargetDir)"</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
