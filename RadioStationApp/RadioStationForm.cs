@@ -29,6 +29,8 @@ namespace RadioStationApp
             InitializeTaskbarControls();
         }
 
+        #region Form events
+
         private void btnLaRed_Click(object sender, EventArgs e)
         {   
             PlayRadioStream(RadioGroup.Stations["laRed"].Url, RadioGroup.Stations["laRed"].Description);
@@ -60,17 +62,6 @@ namespace RadioStationApp
         private void btnStopStream_Click(object sender, EventArgs e)
         {
             StopRadioStream();
-        }
-
-        private void ResetButtonsOfRadioStreams()
-        {
-            if (!btnLaRed.Enabled)
-                btnLaRed.Enabled = true;
-
-            if (!btnContinental.Enabled)
-                btnContinental.Enabled = true;
-
-            ResetRadiosPopup();
         }
 
         private void btnRadios_Click(object sender, EventArgs e)
@@ -137,21 +128,12 @@ namespace RadioStationApp
             btnLaRed.Enabled = btnContinental.Enabled = true;
         }
 
-        private void ResetRadiosPopup()
-        {
-            cmsRadiosPopup.Items
-            .OfType<ToolStripMenuItem>().ToList()
-            .ForEach(item =>
-            {
-                item.Enabled = true;
-                item.Checked = false;
-            });
-        }
-
         private void RadioStation_FormClosing(object sender, FormClosingEventArgs e)
         {
             FreeBASSResources();
         }
+
+        #endregion
 
         #region Library resources
 
@@ -265,9 +247,31 @@ namespace RadioStationApp
             this.BringToFront();
         }
 
+        private void ResetButtonsOfRadioStreams()
+        {
+            if (!btnLaRed.Enabled)
+                btnLaRed.Enabled = true;
+
+            if (!btnContinental.Enabled)
+                btnContinental.Enabled = true;
+
+            ResetRadiosPopup();
+        }
+
+        private void ResetRadiosPopup()
+        {
+            cmsRadiosPopup.Items
+            .OfType<ToolStripMenuItem>().ToList()
+            .ForEach(item =>
+            {
+                item.Enabled = true;
+                item.Checked = false;
+            });
+        }
+
         #endregion
 
-        #region Stream actions
+        #region Stream playback actions
 
         private void PlayRadioStream(string streamUrl, string description)
         {

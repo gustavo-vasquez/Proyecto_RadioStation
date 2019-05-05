@@ -19,7 +19,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49675",
                     Description = "La red AM 910",
                     Url = "https://la_red.secure2.footprint.net/egress/bhandler/streamroot_lsd2latam/la_red/chunklist_b32768.m3u8",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "laRed.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "laRed.ico")
                 }
             },
             {
@@ -28,7 +28,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49676",
                     Description = "Radio continental AM 590",
                     Url = "https://20823.live.streamtheworld.com/CONTINENTAL_SC",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "continental.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "continental.ico")
                 }
             },
             {
@@ -37,7 +37,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49677",
                     Description = "Metro 95.1",
                     Url = "http://mp3.metroaudio1.stream.avstreaming.net:7200/metro",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "metro.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "metro.ico")
                 }
             },
             {
@@ -46,7 +46,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49678",
                     Description = "Radio mitre AM 1100",
                     Url = "http://turadioenvivo.com:11031/stream",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "radioMitre.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "radioMitre.ico")
                 }
             },
             {
@@ -55,7 +55,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49679",
                     Description = "Vorterix",
                     Url = "http://147.135.11.82:9904/;",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "vorterix.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "vorterix.ico")
                 }
             },
             {
@@ -64,7 +64,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49680",
                     Description = "Del plata AM 1030",
                     Url = "http://181.119.157.98:8000/amdelplata.mp3",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "delPlata.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "delPlata.ico")
                 }
             },
             {
@@ -73,7 +73,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49681",
                     Description = "El destape",
                     Url = "https://s2.radio.co/s120d8d180/listen",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "elDestape.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "elDestape.ico")
                 }
             },
             {
@@ -82,7 +82,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49682",
                     Description = "Radio rivadavia AM 630",
                     Url = "http://209.95.35.49:7012/live",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "radioRivadavia.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "radioRivadavia.ico")
                 }
             },
             {
@@ -91,7 +91,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49683",
                     Description = "Radio latina FM 101.1",
                     Url = "http://streaming.latina101.com.ar:8080/RadioLatina",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "radioLatina.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "radioLatina.ico")
                 }
             },
             {
@@ -100,7 +100,7 @@ namespace RadioStationApp
                     Command = _CommandPrefix + "49684",
                     Description = "CNN radio argentina",
                     Url = "http://estudio.cnnradioargentina.com.ar:8000/stream",
-                    Icon = Path.Combine(Application.StartupPath, @"..\..", "resources", "icons", "radios", "cnnRadioArgentina.ico")
+                    Icon = Path.Combine(Application.StartupPath, "icons", "cnnRadioArgentina.ico")
                 }
             }
         };
