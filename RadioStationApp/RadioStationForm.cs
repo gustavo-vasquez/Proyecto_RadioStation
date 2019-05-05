@@ -1,21 +1,18 @@
-﻿using Microsoft.WindowsAPICodePack.Taskbar;
+﻿using JumpListHelpers;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Media;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Un4seen.Bass;
 
 namespace RadioStationApp
 {
-    public partial class RadioStation : Form
+    public partial class RadioStation : JumpListMainFormBase
     {
         private string[] _args = Environment.GetCommandLineArgs();
         private int _stream;
@@ -30,11 +27,6 @@ namespace RadioStationApp
             InitializeComponent();
             InitializeBASSLibrary(true);
             InitializeTaskbarControls();
-        }
-
-        private void RadioStation_Load(object sender, EventArgs e)
-        {
-            CheckLineArguments();
         }
 
         private void btnLaRed_Click(object sender, EventArgs e)
@@ -112,7 +104,7 @@ namespace RadioStationApp
 
         private void aboutItem_Click(object sender, EventArgs e)
         {
-            string appInfoText = String.Join(
+            string appInfoText = string.Join(
                     null,
                     ProjectInfo.Product,
                     Environment.NewLine,
@@ -161,7 +153,7 @@ namespace RadioStationApp
             FreeBASSResources();
         }
 
-        #region LIBRARY RESOURCES
+        #region Library resources
 
         private void InitializeBASSLibrary(bool enablePlugins)
         {
@@ -187,6 +179,8 @@ namespace RadioStationApp
 
         #endregion
 
+        #region Form actions
+
         private void InitializeTaskbarControls()
         {
             muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker, "Silenciar");
@@ -198,29 +192,40 @@ namespace RadioStationApp
             stopThumbnailButton.Enabled = false;
             TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, stopThumbnailButton);
 
-            JumpList jumplist = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, IntPtr.Zero);
-            JumpListCustomCategory category = new JumpListCustomCategory("Radios");
-            List<JumpListLink> items = new List<JumpListLink>();
-
-            foreach (KeyValuePair<string, RadioData> radio in RadioGroup.Stations)
+            this.JumpListCommandReceived += (sender, e) =>
             {
-                items.Add(new JumpListLink(Assembly.GetEntryAssembly().Location, radio.Value.Description)
-                {
-                    IconReference = new Microsoft.WindowsAPICodePack.Shell.IconReference(radio.Value.Icon, 0),
-                    Arguments = "-" + radio.Value.Name
-                });
-            }
+                CheckLineArguments(e.CommandName);
+            };
 
-            category.AddJumpListItems(items.ToArray());
-            jumplist.AddCustomCategories(category);
-            jumplist.Refresh();
+            this.Shown += (sender, e) =>
+            {
+                string categoryName = "Radios";
+
+                foreach (KeyValuePair<string, RadioData> radio in RadioGroup.Stations)
+                {
+                    JumpListManager.AddCategorySelfLink(
+                            categoryName,
+                            radio.Value.Description,
+                            "-" + radio.Key,
+                            radio.Value.Icon,
+                            0
+                        );
+                }
+
+                JumpListManager.Refresh();
+
+                if (_args.Length > 1)
+                    foreach (KeyValuePair<string, RadioData> radio in RadioGroup.Stations)
+                        if (_args[1] == radio.Value.Command)
+                            CheckLineArguments("-" + radio.Key);
+            };
         }
 
-        private void CheckLineArguments()
+        private void CheckLineArguments(string commandLine)
         {
-            if (_args.Length > 1)
+            if (!string.IsNullOrWhiteSpace(commandLine))
             {
-                switch (_args[1])
+                switch (commandLine)
                 {
                     case "-laRed":
                         btnLaRed.PerformClick();
@@ -256,9 +261,13 @@ namespace RadioStationApp
                         break;
                 }
             }
+
+            this.BringToFront();
         }
 
-        #region STREAM ACTIONS
+        #endregion
+
+        #region Stream actions
 
         private void PlayRadioStream(string streamUrl, string description)
         {

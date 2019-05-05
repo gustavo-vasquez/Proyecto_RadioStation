@@ -307,7 +307,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Estación de radio";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RadioStation_FormClosing);
-            this.Load += new System.EventHandler(this.RadioStation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgEqualizer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgContinental)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLaRed)).EndInit();
