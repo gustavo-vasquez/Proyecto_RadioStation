@@ -243,8 +243,6 @@ namespace RadioStationApp
                         break;
                 }
             }
-
-            this.BringToFront();
         }
 
         private void ResetButtonsOfRadioStreams()
