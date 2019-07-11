@@ -18,7 +18,7 @@ namespace RadioStationApp
                 {
                     Command = _CommandPrefix + "49675",
                     Description = "La red AM 910",
-                    Url = "https://lared_ar.secure2.footprint.net/egress/bhandler/streamroot_lsd2latam/lared_ar/chunklist_b32768.m3u8",
+                    Url = "https://la_red.secure2.footprint.net/egress/bhandler/streamroot_lsd2latam/la_red/chunklist_b327680.m3u8",
                     Icon = Path.Combine(Application.StartupPath, "icons", "laRed.ico")
                 }
             },
@@ -54,7 +54,7 @@ namespace RadioStationApp
                 {
                     Command = _CommandPrefix + "49679",
                     Description = "Vorterix",
-                    Url = "http://147.135.11.82:9904/;",
+                    Url = "https://cdn-gs-rg.radiocut.com.ar/vorterix/156/286/1562860956.46-120.0.mp3",
                     Icon = Path.Combine(Application.StartupPath, "icons", "vorterix.ico")
                 }
             },
@@ -72,7 +72,7 @@ namespace RadioStationApp
                 {
                     Command = _CommandPrefix + "49681",
                     Description = "El destape",
-                    Url = "https://s2.radio.co/s120d8d180/listen",
+                    Url = "https://cdn2.instream.audio/:8000/stream",
                     Icon = Path.Combine(Application.StartupPath, "icons", "elDestape.ico")
                 }
             },
