@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Streadio online")]
+[assembly: AssemblyTitle("Streadio")]
 [assembly: AssemblyDescription("Escucha radios mediante streaming.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Streadio online")]
+[assembly: AssemblyProduct("Streadio")]
 [assembly: AssemblyCopyright("Copyright © 2019 por Gustavo Vasquez")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

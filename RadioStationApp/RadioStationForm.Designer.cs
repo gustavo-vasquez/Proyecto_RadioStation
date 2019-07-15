@@ -305,7 +305,7 @@
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "RadioStation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Streadio online";
+            this.Text = "Streadio";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RadioStation_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.imgEqualizer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgContinental)).EndInit();
