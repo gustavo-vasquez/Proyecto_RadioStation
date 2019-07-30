@@ -183,6 +183,10 @@
     <Content Include="resources\images\equalizer.gif" />
     <Content Include="resources\images\Radio_LaRed_AM_910.jpg" />
     <Content Include="resources\images\Radio_Continental_AM_590.png" />
+    <Content Include="resources\previews\streadio_1.png" />
+    <Content Include="resources\previews\streadio_2.png" />
+    <Content Include="resources\previews\streadio_3.png" />
+    <Content Include="resources\previews\streadio_4.png" />
     <Content Include="resources\RadioStation.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
