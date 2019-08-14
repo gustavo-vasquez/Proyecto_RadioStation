@@ -177,6 +177,7 @@ namespace RadioStationApp
             this.JumpListCommandReceived += (sender, e) =>
             {
                 CheckLineArguments(e.CommandName);
+                this.WindowState = FormWindowState.Minimized;
             };
 
             this.Shown += (sender, e) =>
