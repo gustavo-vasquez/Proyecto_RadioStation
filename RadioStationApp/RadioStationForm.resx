@@ -123,12 +123,23 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCustomRadio.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAAADaSURBVDhPtZM/CwFhHMefpMhKBoNFRrMRZVJKlGLyEgwG
-        78FCIqNJRBm9BLPFZPQSvACf3/OHTro7Vz716fv91d1zd8/dqZAkbEZmaDMyd0yb+jslvGBbTyFo2XSM
-        sIkzPQWQxKupL7YYw52eApCr3zCvJ6VSuDZVLTBjqpcyyoniEfvYQ6GBA1NVFztYQ3e8nOtZoIqy23MU
-        ppgzVWVxiSf0LPCNjc29TccZx6b6s0J5fRM9vZE7qJjqjzz3Aet6eiPfgmxsIEV84Oc/ELcZCvf6IlOw
-        +U+UegJd+Bq8/msw2wAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAAAZiS0dEAAAA
+        AAAA+UO7fwAAAAl2cEFnAAAAEAAAABAAXMatwwAAACV0RVh0Y3JlYXRlLWRhdGUAMjAwOS0wOS0yOFQx
+        MToyNzo1NS0wNDowMOz8sYkAAAAldEVYdG1vZGlmeS1kYXRlADIwMDgtMTAtMjdUMjE6MzQ6NDktMDQ6
+        MDDMeUkuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAvFJREFUOE9jQAOszMzM
+        JjKyMun6+volxmbGRVb2VsGKyoqSSVmJUCVYACsrK4jiAoJ6BweHZ2lpaX/d3Nzu6+jrXE7OT/6e25h7
+        2MTdxKJtVRsDMyszWA8cqKurQ1kM0aZmpj9a21r/x8XFnZKQkDAGiklLSEvMiC6L/hvZHnlFyU7JwCTc
+        BKIaBnh5eUEUEwcnx+K4+Lj/eXl5r2TlZO2MTUD6wYBPUEJwpXub+3+rUqv1bPxsPAJaAlApIGBnZwdR
+        XKJiogfLK8r/+/v7LwfyWZiYmEDiMGAi6yT70rbX7ruar7qXUTLccAYGNjY2EMUrKSl5rL6+/r+vn2/d
+        zFkzwXJIgJ1Plme771yH/9F9fps8AqzF/OMdITLAgANRHCIiInsqqyr/BwYFtuzbtw8sB3Id0AI2FmaW
+        bClZiae+uXb/42v8Pzl4mdm4BFqC1TAICID9w8jNzb0oIzPjf1RU1FIgn4mRkZEB6g0zYIC+cXJy+m9u
+        ZvHf1sb2n6WlRRdIDQsLCwODsZExA0gxEJcHBgb+z8jIuAiUlCgpKwZpBgFfLS2tX9bW1v+DgoL+u7i4
+        /Pfy8nogJyenIisrC1UCAU7GxsZfS0tLfygpKe3W1dWdYWpq6gkUt5GXl3/n7Oz8PzQ09L+Pj89/X1/f
+        r0B5W2Big+iEAmNlZeX3+Xn5/wvyC/67urr9j4yI/Ax0VR8nJ+dWGxsbkM1Acdf/QPYNKSkpJbgLQF4A
+        AkFgmqgCCr4qnR7+v2Jt4H//ePf/8XEJX4CJrYGPj2+5jo7ODaCrtgGd7wLSgBLVfMAExc7CycLGzro4
+        eJrR/9p3/v8jdzv9dw12+W9iZLIKqIQHmE/EgZHCBU18qEBNTRXsEmYGFmtha94nhluV/muekftvkWz6
+        X1NVczNQCRvQAIhiXADoTAYVTlVGFjZWX05L9v2SsWL3NUzVT4qLinvb2dlBVREAwgwSDNIM6gxcDDz8
+        vAx8ylws3KIMLCDHgcMJDTAwAABOaML45i3YlgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="imgEqualizer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

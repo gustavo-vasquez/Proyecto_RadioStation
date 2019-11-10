@@ -171,6 +171,7 @@
     <Content Include="resources\icons\thumbnails\speaker_mute.ico" />
     <Content Include="resources\icons\thumbnails\stop.ico" />
     <Content Include="resources\icons\thumbnails\previous.ico" />
+    <Content Include="resources\images\buttons\headphones.png" />
     <Content Include="resources\images\buttons\online_radio.png" />
     <Content Include="resources\images\buttons\stop_alternative.png" />
     <Content Include="resources\images\buttons\wave_signal.png" />
