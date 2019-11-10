@@ -53,10 +53,13 @@
             this.separatorItem = new System.Windows.Forms.ToolStripSeparator();
             this.aboutItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tltGeneral = new System.Windows.Forms.ToolTip(this.components);
+            this.trackBarVolume = new System.Windows.Forms.TrackBar();
+            this.labelVolume = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgEqualizer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgContinental)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLaRed)).BeginInit();
             this.cmsRadiosPopup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLaRed
@@ -90,10 +93,12 @@
             // 
             // txtCustomRadio
             // 
+            this.txtCustomRadio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCustomRadio.Location = new System.Drawing.Point(12, 49);
             this.txtCustomRadio.Name = "txtCustomRadio";
             this.txtCustomRadio.Size = new System.Drawing.Size(179, 20);
             this.txtCustomRadio.TabIndex = 0;
+            this.tltGeneral.SetToolTip(this.txtCustomRadio, "Escribe la URL de la radio que quieres escuchar (HTTP/HTTPS)");
             this.txtCustomRadio.Enter += new System.EventHandler(this.txtCustomRadio_Enter);
             this.txtCustomRadio.Leave += new System.EventHandler(this.txtCustomRadio_Leave);
             // 
@@ -107,7 +112,7 @@
             this.btnCustomRadio.TabIndex = 1;
             this.btnCustomRadio.Text = "Escuchar";
             this.btnCustomRadio.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tltGeneral.SetToolTip(this.btnCustomRadio, "Escuchar url de radio ingresada");
+            this.tltGeneral.SetToolTip(this.btnCustomRadio, "Escuchar radio a través de la URL ingresada");
             this.btnCustomRadio.UseVisualStyleBackColor = true;
             this.btnCustomRadio.Click += new System.EventHandler(this.btnCustomRadio_Click);
             // 
@@ -117,7 +122,7 @@
             this.btnMute.Location = new System.Drawing.Point(224, 226);
             this.btnMute.Name = "btnMute";
             this.btnMute.Size = new System.Drawing.Size(48, 23);
-            this.btnMute.TabIndex = 4;
+            this.btnMute.TabIndex = 6;
             this.tltGeneral.SetToolTip(this.btnMute, "Activar/desactivar sonido");
             this.btnMute.UseVisualStyleBackColor = true;
             this.btnMute.Click += new System.EventHandler(this.btnMute_Click);
@@ -130,7 +135,7 @@
             this.btnRadios.Location = new System.Drawing.Point(12, 226);
             this.btnRadios.Name = "btnRadios";
             this.btnRadios.Size = new System.Drawing.Size(48, 23);
-            this.btnRadios.TabIndex = 6;
+            this.btnRadios.TabIndex = 4;
             this.tltGeneral.SetToolTip(this.btnRadios, "Escuchar radios adicionales");
             this.btnRadios.UseVisualStyleBackColor = true;
             this.btnRadios.Click += new System.EventHandler(this.btnRadios_Click);
@@ -138,7 +143,7 @@
             // imgEqualizer
             // 
             this.imgEqualizer.Image = ((System.Drawing.Image)(resources.GetObject("imgEqualizer.Image")));
-            this.imgEqualizer.Location = new System.Drawing.Point(130, 122);
+            this.imgEqualizer.Location = new System.Drawing.Point(130, 87);
             this.imgEqualizer.Name = "imgEqualizer";
             this.imgEqualizer.Size = new System.Drawing.Size(23, 14);
             this.imgEqualizer.TabIndex = 8;
@@ -282,12 +287,45 @@
             this.aboutItem.Text = "Acerca de...";
             this.aboutItem.Click += new System.EventHandler(this.aboutItem_Click);
             // 
+            // tltGeneral
+            // 
+            this.tltGeneral.IsBalloon = true;
+            // 
+            // trackBarVolume
+            // 
+            this.trackBarVolume.AutoSize = false;
+            this.trackBarVolume.Enabled = false;
+            this.trackBarVolume.LargeChange = 10;
+            this.trackBarVolume.Location = new System.Drawing.Point(133, 101);
+            this.trackBarVolume.Maximum = 100;
+            this.trackBarVolume.Name = "trackBarVolume";
+            this.trackBarVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarVolume.Size = new System.Drawing.Size(24, 90);
+            this.trackBarVolume.SmallChange = 5;
+            this.trackBarVolume.TabIndex = 7;
+            this.trackBarVolume.TickFrequency = 5;
+            this.trackBarVolume.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tltGeneral.SetToolTip(this.trackBarVolume, "Volumen");
+            this.trackBarVolume.Value = 70;
+            this.trackBarVolume.ValueChanged += new System.EventHandler(this.trackBarVolume_ValueChanged);
+            // 
+            // labelVolume
+            // 
+            this.labelVolume.Location = new System.Drawing.Point(125, 185);
+            this.labelVolume.Name = "labelVolume";
+            this.labelVolume.Size = new System.Drawing.Size(34, 14);
+            this.labelVolume.TabIndex = 10;
+            this.labelVolume.Text = "70";
+            this.labelVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // RadioStation
             // 
             this.AcceptButton = this.btnCustomRadio;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.labelVolume);
+            this.Controls.Add(this.trackBarVolume);
             this.Controls.Add(this.btnMute);
             this.Controls.Add(this.btnRadios);
             this.Controls.Add(this.imgEqualizer);
@@ -311,6 +349,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgContinental)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLaRed)).EndInit();
             this.cmsRadiosPopup.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,6 +380,8 @@
         private System.Windows.Forms.ToolStripSeparator separatorItem;
         private System.Windows.Forms.ToolStripMenuItem aboutItem;
         private System.Windows.Forms.ToolTip tltGeneral;
+        private System.Windows.Forms.TrackBar trackBarVolume;
+        private System.Windows.Forms.Label labelVolume;
     }
 }
 

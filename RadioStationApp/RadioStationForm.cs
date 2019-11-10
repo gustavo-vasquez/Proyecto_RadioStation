@@ -17,9 +17,12 @@ namespace RadioStationApp
         private string[] _args = Environment.GetCommandLineArgs();
         private int _stream;
         private Dictionary<int, string> _plugins;
-        private float _volume = 1f;
+        private float _volume = 0.7f;
+        private string _previousStreamUrl, _previousStreamDescription;
+        private string _currentStreamUrl, _currentStreamDescription;
         private const string _customRadioPlaceHolder = "Pegar stream url...";
         private ThumbnailToolBarButton muteThumbnailButton;
+        private ThumbnailToolBarButton previousThumbnailButton;
         private ThumbnailToolBarButton stopThumbnailButton;
 
         public RadioStation()
@@ -27,6 +30,7 @@ namespace RadioStationApp
             InitializeComponent();
             InitializeBASSLibrary(true);
             InitializeTaskbarControls();
+            trackBarVolume.MouseWheel += trackBarVolume_MouseWheel;
         }
 
         #region Form events
@@ -168,11 +172,14 @@ namespace RadioStationApp
             muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker, "Silenciar");
             muteThumbnailButton.Click += (sender, args) => { MuteRadioStream(); };
 
+            previousThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.previous, "Sintonizar radio anterior");
+            previousThumbnailButton.Click += (sender, args) => { if (_previousStreamUrl != null && _previousStreamDescription != null) PlayRadioStream(_previousStreamUrl, _previousStreamDescription); };
+
             stopThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.stop, "Detener");
             stopThumbnailButton.Click += (sender, args) => { StopRadioStream(); };
-
             stopThumbnailButton.Enabled = false;
-            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, stopThumbnailButton);
+
+            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, previousThumbnailButton, stopThumbnailButton);
 
             this.JumpListCommandReceived += (sender, e) =>
             {
@@ -283,9 +290,11 @@ namespace RadioStationApp
             {
                 Bass.BASS_ChannelPlay(_stream, false);
                 Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume);
+                _currentStreamUrl = streamUrl;
+                _currentStreamDescription = description;
 
                 txtMessage.Text = "Estás escuchando " + description;
-                imgEqualizer.Visible = btnStopStream.Enabled = stopThumbnailButton.Enabled = true;
+                imgEqualizer.Visible = btnStopStream.Enabled = trackBarVolume.Enabled = stopThumbnailButton.Enabled = true;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
                 TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.play_status, "streaming");
             }
@@ -296,10 +305,12 @@ namespace RadioStationApp
         private void StopRadioStream()
         {
             Bass.BASS_ChannelStop(_stream);
+            _previousStreamUrl = _currentStreamUrl;
+            _previousStreamDescription = _currentStreamDescription;
 
             txtMessage.Text = "-";
             ResetButtonsOfRadioStreams();
-            imgEqualizer.Visible = btnStopStream.Enabled = stopThumbnailButton.Enabled = false;
+            imgEqualizer.Visible = btnStopStream.Enabled = trackBarVolume.Enabled = stopThumbnailButton.Enabled = false;
             TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.stop_status, "Stop");
             TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error, Handle);
             TaskbarManager.Instance.SetProgressValue(100, 100, Handle);
@@ -315,18 +326,46 @@ namespace RadioStationApp
                     btnMute.Image = Properties.Resources.speaker_button;
                     muteThumbnailButton.Icon = Properties.Resources.speaker;
                     muteThumbnailButton.Tooltip = "Silenciar";
-                    Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 1f);
+                    trackBarVolume.Enabled = true;
+                    Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = (float)trackBarVolume.Value / 100);
                 }
                 else
                 {
                     btnMute.Image = Properties.Resources.speaker_mute_button;
                     muteThumbnailButton.Icon = Properties.Resources.speaker_mute;
                     muteThumbnailButton.Tooltip = "Encender";
+                    trackBarVolume.Enabled = false;
                     Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 0f);
                 }
             }
         }
 
         #endregion
+
+        private void trackBarVolume_ValueChanged(object sender, EventArgs e)
+        {
+            TrackBar volumeBar = (TrackBar)sender;
+            labelVolume.Text = volumeBar.Value.ToString();
+            Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = (float)volumeBar.Value / 100);
+        }
+
+        private void trackBarVolume_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true; //disable default mouse wheel
+            if (e.Delta > 0)
+            {
+                if (trackBarVolume.Value < trackBarVolume.Maximum)
+                {
+                    trackBarVolume.Value = trackBarVolume.Value + 5;
+                }
+            }
+            else
+            {
+                if (trackBarVolume.Value > trackBarVolume.Minimum)
+                {
+                    trackBarVolume.Value = trackBarVolume.Value - 5;
+                }
+            }
+        }
     }
 }
