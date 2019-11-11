@@ -17,7 +17,7 @@ namespace RadioStationApp
         private string[] _args = Environment.GetCommandLineArgs();
         private int _stream;
         private Dictionary<int, string> _plugins;
-        private float _volume = 0.7f;
+        private float _volume = 0.5f;
         private string _previousStreamUrl, _previousStreamDescription;
         private string _currentStreamUrl, _currentStreamDescription;
         private const string _customRadioPlaceHolder = "Pegar stream url...";
@@ -30,6 +30,7 @@ namespace RadioStationApp
             InitializeComponent();
             InitializeBASSLibrary(true);
             InitializeTaskbarControls();
+            MouseWheel += trackBarVolume_MouseWheel;
             trackBarVolume.MouseWheel += trackBarVolume_MouseWheel;
         }
 
@@ -308,7 +309,7 @@ namespace RadioStationApp
             _previousStreamUrl = _currentStreamUrl;
             _previousStreamDescription = _currentStreamDescription;
 
-            txtMessage.Text = "-";
+            txtMessage.Text = "";
             ResetButtonsOfRadioStreams();
             imgEqualizer.Visible = btnStopStream.Enabled = trackBarVolume.Enabled = stopThumbnailButton.Enabled = false;
             TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.stop_status, "Stop");
@@ -351,19 +352,33 @@ namespace RadioStationApp
 
         private void trackBarVolume_MouseWheel(object sender, MouseEventArgs e)
         {
-            ((HandledMouseEventArgs)e).Handled = true; //disable default mouse wheel
-            if (e.Delta > 0)
+            int newVolume = trackBarVolume.Value;
+
+            try
             {
-                if (trackBarVolume.Value < trackBarVolume.Maximum)
+                ((HandledMouseEventArgs)e).Handled = true; // disable default mouse wheel
+                
+                if (e.Delta > 0)
                 {
-                    trackBarVolume.Value = trackBarVolume.Value + 5;
+                    if (trackBarVolume.Value < trackBarVolume.Maximum)
+                        newVolume = trackBarVolume.Value + 5;
                 }
-            }
-            else
-            {
-                if (trackBarVolume.Value > trackBarVolume.Minimum)
+                else
                 {
-                    trackBarVolume.Value = trackBarVolume.Value - 5;
+                    if (trackBarVolume.Value > trackBarVolume.Minimum)
+                        newVolume = trackBarVolume.Value - 5;
+                }
+
+                trackBarVolume.Value = newVolume;
+            }
+            catch (Exception error)
+            {
+                if (error is ArgumentOutOfRangeException)
+                {
+                    if (newVolume < trackBarVolume.Minimum)
+                        trackBarVolume.Value = 0;
+                    else if (newVolume > trackBarVolume.Maximum)
+                        trackBarVolume.Value = 100;
                 }
             }
         }

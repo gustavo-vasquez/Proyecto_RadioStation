@@ -78,7 +78,6 @@
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(260, 33);
             this.txtMessage.TabIndex = 1;
-            this.txtMessage.Text = "-";
             this.txtMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnContinental
@@ -122,7 +121,7 @@
             this.btnMute.Location = new System.Drawing.Point(224, 226);
             this.btnMute.Name = "btnMute";
             this.btnMute.Size = new System.Drawing.Size(48, 23);
-            this.btnMute.TabIndex = 6;
+            this.btnMute.TabIndex = 7;
             this.tltGeneral.SetToolTip(this.btnMute, "Activar/desactivar sonido");
             this.btnMute.UseVisualStyleBackColor = true;
             this.btnMute.Click += new System.EventHandler(this.btnMute_Click);
@@ -302,11 +301,11 @@
             this.trackBarVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarVolume.Size = new System.Drawing.Size(24, 90);
             this.trackBarVolume.SmallChange = 5;
-            this.trackBarVolume.TabIndex = 7;
+            this.trackBarVolume.TabIndex = 6;
             this.trackBarVolume.TickFrequency = 5;
             this.trackBarVolume.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tltGeneral.SetToolTip(this.trackBarVolume, "Volumen");
-            this.trackBarVolume.Value = 70;
+            this.trackBarVolume.Value = 50;
             this.trackBarVolume.ValueChanged += new System.EventHandler(this.trackBarVolume_ValueChanged);
             // 
             // labelVolume
@@ -315,7 +314,7 @@
             this.labelVolume.Name = "labelVolume";
             this.labelVolume.Size = new System.Drawing.Size(34, 14);
             this.labelVolume.TabIndex = 10;
-            this.labelVolume.Text = "70";
+            this.labelVolume.Text = "50";
             this.labelVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RadioStation

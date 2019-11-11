@@ -142,6 +142,9 @@
         vAx8ylws3KIMLCDHgcMJDTAwAABOaML45i3YlgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="tltGeneral.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>162, 17</value>
+  </metadata>
   <data name="imgEqualizer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhFwAOAPABAACgzv///yH/C05FVFNDQVBFMi4wAwEAAAAh/wt4bXAgZGF0YXhtcP8/eHBhY2tl
