@@ -14,7 +14,7 @@ namespace RadioStationApp
         public static Dictionary<string, RadioData> Stations = new Dictionary<string, RadioData>()
         {
             {
-                "laRed", new RadioData()
+                "la_red", new RadioData()
                 {
                     Command = _CommandPrefix + "49675",
                     Description = "La red AM 910",
@@ -41,7 +41,7 @@ namespace RadioStationApp
                 }
             },
             {
-                "radioMitre", new RadioData()
+                "radio_mitre", new RadioData()
                 {
                     Command = _CommandPrefix + "49678",
                     Description = "Radio mitre AM 1100",
@@ -59,7 +59,7 @@ namespace RadioStationApp
                 }
             },
             {
-                "delPlata", new RadioData()
+                "del_plata", new RadioData()
                 {
                     Command = _CommandPrefix + "49680",
                     Description = "Del plata AM 1030",
@@ -68,7 +68,7 @@ namespace RadioStationApp
                 }
             },
             {
-                "elDestape", new RadioData()
+                "el_destape", new RadioData()
                 {
                     Command = _CommandPrefix + "49681",
                     Description = "El destape",
@@ -77,7 +77,7 @@ namespace RadioStationApp
                 }
             },
             {
-                "radioRivadavia", new RadioData()
+                "radio_rivadavia", new RadioData()
                 {
                     Command = _CommandPrefix + "49682",
                     Description = "Radio rivadavia AM 630",
@@ -86,7 +86,7 @@ namespace RadioStationApp
                 }
             },
             {
-                "radioLatina", new RadioData()
+                "radio_latina", new RadioData()
                 {
                     Command = _CommandPrefix + "49683",
                     Description = "Radio latina FM 101.1",
@@ -95,7 +95,7 @@ namespace RadioStationApp
                 }
             },
             {
-                "cnnRadioArgentina", new RadioData()
+                "cnn_radio_argentina", new RadioData()
                 {
                     Command = _CommandPrefix + "49684",
                     Description = "CNN radio argentina",

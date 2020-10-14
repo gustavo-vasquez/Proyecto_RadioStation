@@ -17,9 +17,11 @@ namespace RadioStationApp
         private string[] _args = Environment.GetCommandLineArgs();
         private int _stream;
         private Dictionary<int, string> _plugins;
-        private float _volume = 0.8f;
-        private string _previousStreamUrl, _previousStreamDescription;
-        private string _currentStreamUrl, _currentStreamDescription;
+        private float _volume = 1f;
+        private string _previousStreamUrl;
+        private string _previousStreamDescription;
+        private string _currentStreamUrl;
+        private string _currentStreamDescription;
         private const string _customRadioPlaceHolder = "Pegar stream url...";
         private ThumbnailToolBarButton muteThumbnailButton;
         private ThumbnailToolBarButton previousThumbnailButton;
@@ -38,7 +40,7 @@ namespace RadioStationApp
 
         private void btnLaRed_Click(object sender, EventArgs e)
         {   
-            PlayRadioStream(RadioGroup.Stations["laRed"].Url, RadioGroup.Stations["laRed"].Description);
+            PlayRadioStream(RadioGroup.Stations["la_red"].Url, RadioGroup.Stations["la_red"].Description);
             btnLaRed.Enabled = false;
 
             if (!btnContinental.Enabled)
@@ -60,8 +62,28 @@ namespace RadioStationApp
 
         private void btnCustomRadio_Click(object sender, EventArgs e)
         {
-            PlayRadioStream(txtCustomRadio.Text, "personalizada");
-            ResetButtonsOfRadioStreams();
+            if(txtCustomRadio.Text != _customRadioPlaceHolder && !string.IsNullOrWhiteSpace(txtCustomRadio.Text))
+            {
+                PlayRadioStream(txtCustomRadio.Text, "personalizada");
+                ResetButtonsOfRadioStreams();
+            }
+        }
+
+        private void RadiosItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem currentMenuItem = sender as ToolStripMenuItem;
+
+            currentMenuItem.Owner.Items
+            .OfType<ToolStripMenuItem>().Where(i => i.Name != currentMenuItem.Name).ToList()
+            .ForEach(item =>
+            {
+                item.Enabled = true;
+                item.Checked = false;
+            });
+
+            PlayRadioStream(RadioGroup.Stations[currentMenuItem.Name].Url, RadioGroup.Stations[currentMenuItem.Name].Description);
+            currentMenuItem.Enabled = false;
+            btnLaRed.Enabled = btnContinental.Enabled = true;
         }
 
         private void btnStopStream_Click(object sender, EventArgs e)
@@ -116,23 +138,6 @@ namespace RadioStationApp
             DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void RadiosItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem currentMenuItem = sender as ToolStripMenuItem;
-            
-            currentMenuItem.Owner.Items
-            .OfType<ToolStripMenuItem>().Where(i => i.Name != currentMenuItem.Name).ToList()
-            .ForEach(item =>
-            {
-                item.Enabled = true;
-                item.Checked = false;
-            });
-
-            PlayRadioStream(RadioGroup.Stations[currentMenuItem.Name].Url, RadioGroup.Stations[currentMenuItem.Name].Description);
-            currentMenuItem.Enabled = false;
-            btnLaRed.Enabled = btnContinental.Enabled = true;
-        }
-
         private void RadioStation_FormClosing(object sender, FormClosingEventArgs e)
         {
             FreeBASSResources();
@@ -171,13 +176,48 @@ namespace RadioStationApp
         private void InitializeTaskbarControls()
         {
             muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker, "Silenciar");
-            muteThumbnailButton.Click += (sender, args) => { MuteRadioStream(); };
+
+            muteThumbnailButton.Click += (sender, args) => {
+                MuteRadioStream();
+            };
 
             previousThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.previous, "Sintonizar radio anterior");
-            previousThumbnailButton.Click += (sender, args) => { if (_previousStreamUrl != null && _previousStreamDescription != null) PlayRadioStream(_previousStreamUrl, _previousStreamDescription); };
+
+            previousThumbnailButton.Click += (sender, args) => {
+                if (_previousStreamUrl != null && _previousStreamDescription != null)
+                {
+                    KeyValuePair<string, RadioData> currentStation = RadioGroup.Stations.FirstOrDefault(s => s.Value.Description == _previousStreamDescription && s.Value.Url == _previousStreamUrl);
+                    PlayRadioStream(_previousStreamUrl, _previousStreamDescription);
+
+                    if (!currentStation.Equals(default(KeyValuePair<string, RadioData>)))
+                    {
+                        switch (currentStation.Key)
+                        {
+                            case "la_red":
+                                btnLaRed.Enabled = false;
+                                break;
+                            case "continental":
+                                btnContinental.Enabled = false;
+                                break;
+                            default:
+                                ToolStripMenuItem radioPopupItem = cmsRadiosPopup.Items.OfType<ToolStripMenuItem>().FirstOrDefault(t => t.Name == currentStation.Key);
+                                if (radioPopupItem != null)
+                                {
+                                    radioPopupItem.Enabled = false;
+                                    radioPopupItem.Checked = true;
+                                }
+                                break;
+                        }
+                    }
+                }
+            };
 
             stopThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.stop, "Detener");
-            stopThumbnailButton.Click += (sender, args) => { StopRadioStream(); };
+
+            stopThumbnailButton.Click += (sender, args) => {
+                StopRadioStream();
+            };
+
             stopThumbnailButton.Enabled = false;
 
             TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, previousThumbnailButton, stopThumbnailButton);
@@ -218,7 +258,7 @@ namespace RadioStationApp
             {
                 switch (commandLine)
                 {
-                    case "-laRed":
+                    case "-la_red":
                         btnLaRed.PerformClick();
                         break;
                     case "-continental":
@@ -227,25 +267,25 @@ namespace RadioStationApp
                     case "-metro":
                         cmsRadiosPopup.Items[0].PerformClick();
                         break;
-                    case "-radioMitre":
+                    case "-radio_mitre":
                         cmsRadiosPopup.Items[1].PerformClick();
                         break;
                     case "-vorterix":
                         cmsRadiosPopup.Items[2].PerformClick();
                         break;
-                    case "-delPlata":
+                    case "-del_plata":
                         cmsRadiosPopup.Items[3].PerformClick();
                         break;
-                    case "-elDestape":
+                    case "-el_destape":
                         cmsRadiosPopup.Items[4].PerformClick();
                         break;
-                    case "-radioRivadavia":
+                    case "-radio_rivadavia":
                         cmsRadiosPopup.Items[5].PerformClick();
                         break;
-                    case "-radioLatina":
+                    case "-radio_latina":
                         cmsRadiosPopup.Items[6].PerformClick();
                         break;
-                    case "-cnnRadioArgentina":
+                    case "-cnn_radio_argentina":
                         cmsRadiosPopup.Items[7].PerformClick();
                         break;
                     default:
@@ -300,7 +340,10 @@ namespace RadioStationApp
                 TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.play_status, "streaming");
             }
             else
+            {
                 txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
+                ResetButtonsOfRadioStreams();
+            }
         }
 
         private void StopRadioStream()
