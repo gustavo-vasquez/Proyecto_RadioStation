@@ -81,7 +81,7 @@ namespace RadioStationApp
                 {
                     Command = _CommandPrefix + "49682",
                     Description = "Radio rivadavia AM 630",
-                    Url = "http://209.95.35.49:7012/live",
+                    Url = "https://20833.live.streamtheworld.com/RIVADAVIAAAC_SC",
                     Icon = Path.Combine(Application.StartupPath, "icons", "radioRivadavia.ico")
                 }
             },

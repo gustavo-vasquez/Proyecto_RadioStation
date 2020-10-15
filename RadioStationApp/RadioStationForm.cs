@@ -39,7 +39,7 @@ namespace RadioStationApp
         #region Form events
 
         private void btnLaRed_Click(object sender, EventArgs e)
-        {   
+        {
             PlayRadioStream(RadioGroup.Stations["la_red"].Url, RadioGroup.Stations["la_red"].Description);
             btnLaRed.Enabled = false;
 
