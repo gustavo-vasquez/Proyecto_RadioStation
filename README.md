@@ -1,5 +1,5 @@
-# Proyecto_SubtitleFinder
-Aplicación winforms para buscar subtítulos de series y películas usando como fuente sitios web utilizando web scraping.
+# Proyecto_RadioStation
+Aplicación winforms para escuchar emisiones de radio mediante streaming.
 
 Ventana principal
 :-------------------------:
