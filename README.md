@@ -1,4 +1,4 @@
-# Proyecto_RadioStation
+# Streadio
 Aplicación winforms para escuchar emisiones de radio mediante streaming.
 
 Ventana principal
