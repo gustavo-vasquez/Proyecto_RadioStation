@@ -113,6 +113,7 @@ namespace RadioStationApp
                     "Versión: ",
                     Assembly.GetEntryAssembly().GetName().Version.ToString()
                 );
+
             DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

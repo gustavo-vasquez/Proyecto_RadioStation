@@ -83,7 +83,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Radio.cs" />
+    <Compile Include="RadioData.cs" />
     <Compile Include="RadioGroup.cs" />
+    <Compile Include="RadioList.cs" />
     <Compile Include="RadioStationForm.cs">
       <SubType>Form</SubType>
     </Compile>
