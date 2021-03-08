@@ -305,7 +305,7 @@
             this.trackBarVolume.TickFrequency = 5;
             this.trackBarVolume.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tltGeneral.SetToolTip(this.trackBarVolume, "Volumen");
-            this.trackBarVolume.Value = 50;
+            this.trackBarVolume.Value = 100;
             this.trackBarVolume.ValueChanged += new System.EventHandler(this.trackBarVolume_ValueChanged);
             // 
             // labelVolume
@@ -314,7 +314,7 @@
             this.labelVolume.Name = "labelVolume";
             this.labelVolume.Size = new System.Drawing.Size(34, 14);
             this.labelVolume.TabIndex = 10;
-            this.labelVolume.Text = "50";
+            this.labelVolume.Text = "100";
             this.labelVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RadioStation

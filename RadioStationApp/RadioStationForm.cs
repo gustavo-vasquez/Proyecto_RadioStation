@@ -17,7 +17,7 @@ namespace RadioStationApp
         private string[] _args = Environment.GetCommandLineArgs();
         private int _stream;
         private Dictionary<int, string> _plugins;
-        private float _volume = 0.5f;
+        private float _volume = 1f;
         private string _previousStreamUrl, _previousStreamDescription;
         private string _currentStreamUrl, _currentStreamDescription;
         private const string _customRadioPlaceHolder = "Pegar stream url...";
