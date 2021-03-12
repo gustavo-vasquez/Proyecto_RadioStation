@@ -1603,7 +1603,7 @@
         YII=
 </value>
   </data>
-  <data name="radioMitre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="mitre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAahJREFUOE+lk01LAlEUhv09/YG29Q9CJTehG+lrU7mKUgQxCXOVUpCzc6IEDSfb
@@ -1630,7 +1630,7 @@
         XsL6kezoNrMIe1YFifcz4A2TBIMcpSZA8AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="delPlata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="del_plata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAqpJREFUOE+Nk+tLVFEUxaUoSMMQpPBRFPQn1IegwiAmC80cyMnUMisV0UKUwcRS
@@ -1647,7 +1647,7 @@
         M64456pR62X8/RqdojFBNS5QPDS5VdfZYo3yByoUk//gAuA3M/5UO1i5InIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="elDestape.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="el_destape.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAATtJREFUOE/NUT1LA0EQzV8TxM4fk8oibYyKTRAV/CgisjYXPNREA1EEQSV4SoKK
@@ -1658,7 +1658,7 @@
         lDo7LWO3R8OsmGwELJh0Bu2QxTjuq8AP8NcCwCe+ItxHYcVvCgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="radioRivadavia.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="rivadavia.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAYJJREFUOE+lU01LAlEU9eelGLkQXOgi6B8ELkxXDoSQi4ooXUcRFDaDTAilphgI
@@ -1670,7 +1670,7 @@
         dmZ8V8Mw7N7kIMsizwToIxoiiyxqd09Z3KdwCMwDwXH8C3+JfwoAH3OWv3Ldte1wAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="radioLatina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="latina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAdtJREFUOE/Nkt1Lk2EYxt9/wdMK0g477SAJc5u4JCsqFioVacqmZGOa+3pH22Af
@@ -1684,7 +1684,7 @@
         18SD8K8DEvwERpf6gikF7/wAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="cnnRadioArgentina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cnn_argentina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAb1JREFUOE+dkdsrBGEYxt3IDReuKH+HS+5cOpSsklKSHHMoN1zJhVJOpZBDEkUO

@@ -1,5 +1,6 @@
 ﻿using JumpListHelpers;
 using Microsoft.WindowsAPICodePack.Taskbar;
+using RadioStationApp.classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,10 +38,12 @@ namespace RadioStationApp
         #region Form events
 
         private void btnLaRed_Click(object sender, EventArgs e)
-        {   
-            PlayRadioStream(RadioGroup.Stations["laRed"].Url, RadioGroup.Stations["laRed"].Description);
+        {
+            Radio radio = RadioGroup.Stations[RadioNames.LaRed];
+            PlayRadioStream(radio.Url, radio.Description);
             btnLaRed.Enabled = false;
 
+            // Limpieza de estado de los botones
             if (!btnContinental.Enabled)
                 btnContinental.Enabled = true;
 
@@ -49,9 +52,11 @@ namespace RadioStationApp
 
         private void btnContinental_Click(object sender, EventArgs e)
         {
-            PlayRadioStream(RadioGroup.Stations["continental"].Url, RadioGroup.Stations["continental"].Description);
+            Radio radio = RadioGroup.Stations[RadioNames.Continental];
+            PlayRadioStream(radio.Url, radio.Description);
             btnContinental.Enabled = false;
 
+            // Limpieza de estado de los botones
             if (!btnLaRed.Enabled)
                 btnLaRed.Enabled = true;
 
@@ -60,7 +65,7 @@ namespace RadioStationApp
 
         private void btnCustomRadio_Click(object sender, EventArgs e)
         {
-            PlayRadioStream(txtCustomRadio.Text, "personalizada");
+            PlayRadioStream(txtCustomRadio.Text, "radio personalizada");
             ResetButtonsOfRadioStreams();
         }
 
@@ -120,18 +125,23 @@ namespace RadioStationApp
         private void RadiosItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem currentMenuItem = sender as ToolStripMenuItem;
-            
-            currentMenuItem.Owner.Items
-            .OfType<ToolStripMenuItem>().Where(i => i.Name != currentMenuItem.Name).ToList()
-            .ForEach(item =>
-            {
-                item.Enabled = true;
-                item.Checked = false;
-            });
 
-            PlayRadioStream(RadioGroup.Stations[currentMenuItem.Name].Url, RadioGroup.Stations[currentMenuItem.Name].Description);
-            currentMenuItem.Enabled = false;
-            btnLaRed.Enabled = btnContinental.Enabled = true;
+            Radio radio = RadioGroup.Stations[currentMenuItem.Name];
+
+            if (radio != null)
+            {
+                currentMenuItem.Owner.Items
+                .OfType<ToolStripMenuItem>().Where(i => i.Name != currentMenuItem.Name).ToList()
+                .ForEach(item =>
+                {
+                    item.Enabled = true;
+                    item.Checked = false;
+                });
+
+                PlayRadioStream(radio.Url, radio.Description);
+                currentMenuItem.Enabled = false;
+                btnLaRed.Enabled = btnContinental.Enabled = true;
+            }
         }
 
         private void RadioStation_FormClosing(object sender, FormClosingEventArgs e)
@@ -192,13 +202,14 @@ namespace RadioStationApp
             this.Shown += (sender, e) =>
             {
                 string categoryName = "Radios";
+                char commandPrefix = '-';
 
-                foreach (KeyValuePair<string, RadioData> radio in RadioGroup.Stations)
+                foreach (KeyValuePair<string, Radio> radio in RadioGroup.Stations)
                 {
                     JumpListManager.AddCategorySelfLink(
                             categoryName,
                             radio.Value.Description,
-                            "-" + radio.Key,
+                            commandPrefix + radio.Key,
                             radio.Value.Icon,
                             0
                         );
@@ -207,9 +218,9 @@ namespace RadioStationApp
                 JumpListManager.Refresh();
 
                 if (_args.Length > 1)
-                    foreach (KeyValuePair<string, RadioData> radio in RadioGroup.Stations)
+                    foreach (KeyValuePair<string, Radio> radio in RadioGroup.Stations)
                         if (_args[1] == radio.Value.Command)
-                            CheckLineArguments("-" + radio.Key);
+                            CheckLineArguments(commandPrefix + radio.Key);
             };
         }
 
@@ -217,41 +228,18 @@ namespace RadioStationApp
         {
             if (!string.IsNullOrWhiteSpace(commandLine))
             {
-                switch (commandLine)
-                {
-                    case "-laRed":
-                        btnLaRed.PerformClick();
-                        break;
-                    case "-continental":
-                        btnContinental.PerformClick();
-                        break;
-                    case "-metro":
-                        cmsRadiosPopup.Items[0].PerformClick();
-                        break;
-                    case "-radioMitre":
-                        cmsRadiosPopup.Items[1].PerformClick();
-                        break;
-                    case "-vorterix":
-                        cmsRadiosPopup.Items[2].PerformClick();
-                        break;
-                    case "-delPlata":
-                        cmsRadiosPopup.Items[3].PerformClick();
-                        break;
-                    case "-elDestape":
-                        cmsRadiosPopup.Items[4].PerformClick();
-                        break;
-                    case "-radioRivadavia":
-                        cmsRadiosPopup.Items[5].PerformClick();
-                        break;
-                    case "-radioLatina":
-                        cmsRadiosPopup.Items[6].PerformClick();
-                        break;
-                    case "-cnnRadioArgentina":
-                        cmsRadiosPopup.Items[7].PerformClick();
-                        break;
-                    default:
-                        break;
-                }
+                commandLine = commandLine.Substring(1);
+
+                if (commandLine == RadioNames.LaRed)
+                    btnLaRed.PerformClick();
+                else if (commandLine == RadioNames.Continental)
+                    btnContinental.PerformClick();
+                else
+                    foreach(ToolStripItem item in cmsRadiosPopup.Items)
+                    {
+                        if (commandLine == item.Name)
+                            item.PerformClick();
+                    }
             }
         }
 
@@ -295,10 +283,10 @@ namespace RadioStationApp
                 _currentStreamUrl = streamUrl;
                 _currentStreamDescription = description;
 
-                txtMessage.Text = "Estás escuchando " + description;
+                txtMessage.Text = "Estás escuchando: " + description;
                 imgEqualizer.Visible = btnStopStream.Enabled = trackBarVolume.Enabled = stopThumbnailButton.Enabled = true;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate, Handle);
-                TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.play_status, "streaming");
+                TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.play_status, "Play");
             }
             else
                 txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
@@ -310,7 +298,7 @@ namespace RadioStationApp
             _previousStreamUrl = _currentStreamUrl;
             _previousStreamDescription = _currentStreamDescription;
 
-            txtMessage.Text = "";
+            txtMessage.Text = string.Empty;
             ResetButtonsOfRadioStreams();
             imgEqualizer.Visible = btnStopStream.Enabled = trackBarVolume.Enabled = stopThumbnailButton.Enabled = false;
             TaskbarManager.Instance.SetOverlayIcon(Properties.Resources.stop_status, "Stop");
@@ -323,6 +311,7 @@ namespace RadioStationApp
             if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
             {
                 Bass.BASS_ChannelGetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, ref _volume);
+
                 if (_volume == 0f)
                 {
                     btnMute.Image = Properties.Resources.speaker_button;
@@ -335,7 +324,7 @@ namespace RadioStationApp
                 {
                     btnMute.Image = Properties.Resources.speaker_mute_button;
                     muteThumbnailButton.Icon = Properties.Resources.speaker_mute;
-                    muteThumbnailButton.Tooltip = "Encender";
+                    muteThumbnailButton.Tooltip = "Activar sonido";
                     trackBarVolume.Enabled = false;
                     Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume = 0f);
                 }
@@ -358,19 +347,22 @@ namespace RadioStationApp
             try
             {
                 ((HandledMouseEventArgs)e).Handled = true; // disable default mouse wheel
-                
-                if (e.Delta > 0)
-                {
-                    if (trackBarVolume.Value < trackBarVolume.Maximum)
-                        newVolume = trackBarVolume.Value + 5;
-                }
-                else
-                {
-                    if (trackBarVolume.Value > trackBarVolume.Minimum)
-                        newVolume = trackBarVolume.Value - 5;
-                }
 
-                trackBarVolume.Value = newVolume;
+                if (_volume != 0f)
+                {
+                    if (e.Delta > 0)
+                    {
+                        if (trackBarVolume.Value < trackBarVolume.Maximum)
+                            newVolume = trackBarVolume.Value + 5;
+                    }
+                    else
+                    {
+                        if (trackBarVolume.Value > trackBarVolume.Minimum)
+                            newVolume = trackBarVolume.Value - 5;
+                    }
+
+                    trackBarVolume.Value = newVolume;
+                }
             }
             catch (Exception error)
             {

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadioStationApp
+namespace RadioStationApp.classes
 {
     internal static class ProjectInfo
     {

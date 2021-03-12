@@ -77,16 +77,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectInfo.cs" />
+    <Compile Include="classes\RadioNames.cs" />
+    <Compile Include="classes\ProjectInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Radio.cs" />
-    <Compile Include="RadioData.cs" />
-    <Compile Include="RadioGroup.cs" />
-    <Compile Include="RadioList.cs" />
+    <Compile Include="classes\Radio.cs" />
+    <Compile Include="classes\RadioGroup.cs" />
     <Compile Include="RadioStationForm.cs">
       <SubType>Form</SubType>
     </Compile>
