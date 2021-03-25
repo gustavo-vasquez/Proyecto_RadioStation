@@ -8,22 +8,139 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RadioStationApp.Properties
-{
-
-
+namespace RadioStationApp.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://latamstreaming-live-os.akamaized.net/live_passthrough/amlared/chunks.m3u8" +
+            "")]
+        public string laRed {
+            get {
+                return ((string)(this["laRed"]));
+            }
+            set {
+                this["laRed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://20823.live.streamtheworld.com/CONTINENTAL_SC")]
+        public string continental {
+            get {
+                return ((string)(this["continental"]));
+            }
+            set {
+                this["continental"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://mp3.metroaudio1.stream.avstreaming.net:7200/metro")]
+        public string metro {
+            get {
+                return ((string)(this["metro"]));
+            }
+            set {
+                this["metro"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://turadioenvivo.com:11031/stream")]
+        public string mitre {
+            get {
+                return ((string)(this["mitre"]));
+            }
+            set {
+                this["mitre"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://104.131.4.100:8000/stream")]
+        public string vorterix {
+            get {
+                return ((string)(this["vorterix"]));
+            }
+            set {
+                this["vorterix"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://181.119.157.98:8000/amdelplata.mp3")]
+        public string delPlata {
+            get {
+                return ((string)(this["delPlata"]));
+            }
+            set {
+                this["delPlata"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://cdn2.instream.audio/:8000/stream")]
+        public string elDestape {
+            get {
+                return ((string)(this["elDestape"]));
+            }
+            set {
+                this["elDestape"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://18743.live.streamtheworld.com/RIVADAVIAAAC.aac")]
+        public string rivadavia {
+            get {
+                return ((string)(this["rivadavia"]));
+            }
+            set {
+                this["rivadavia"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://streaming.latina101.com.ar:8080/RadioLatina")]
+        public string latina {
+            get {
+                return ((string)(this["latina"]));
+            }
+            set {
+                this["latina"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://estudio.cnnradioargentina.com.ar:8000/stream")]
+        public string cnn {
+            get {
+                return ((string)(this["cnn"]));
+            }
+            set {
+                this["cnn"] = value;
             }
         }
     }

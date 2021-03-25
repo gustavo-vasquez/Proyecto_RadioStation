@@ -121,28 +121,6 @@
     <value>162, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnCustomRadio.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALxSURBVDhPY0ADrMzMzCYysjLp+vr6JcZmxkVW9lbB
-        isqKkklZiVAlWAArKyuI4gKCegcHh2dpaWl/3dzc7uvo61xOzk/+ntuYe9jE3cSibVUbAzMrM1gPHKir
-        q0NZDNGmZqY/Wtta/8fFxZ2SkJAwBopJS0hLzIgui/4b2R55RclOycAk3ASiGgZ4eXlBFBMHJ8fiuPi4
-        /3l5ea9k5WTtjE1A+sGAT1BCcKV7m/t/q1Kr9Wz8bDwCWgJQKSBgZ2cHUVyiYqIHyyvK//v7+y8H8lmY
-        mJhA4jBgIusk+9K21+67mq+6l1Ey3HAGBjY2NhDFKykpeay+vv6/r59v3cxZM8FySICdT5Znu+9ch//R
-        fX6bPAKsxfzjHSEywIADURwiIiJ7Kqsq/wcGBbbs27cPLAdyHdACNhZmlmwpWYmnvrl2/+Nr/D85eJnZ
-        uARagtUwCAiA/cPIzc29KCMz439UVNRSIJ+JkZGRAeoNM2CAvnFycvpvbmbx39bG9p+lpUUXSA0LCwsD
-        g7GRMQNIMRCXBwYG/s/IyLgIlJQoKSsGaQYBXy0trV/W1tb/g4KC/ru4uPz38vJ6ICcnpyIrKwtVAgFO
-        xsbGX0tLS38oKSnt1tXVnWFqauoJFLeRl5d/5+zs/D80NPS/j4/Pf19f369AeVtgYoPohAJjZWXl9/l5
-        +f8L8gv+u7q6/Y+MiPwMdFUfJyfnVhsbG5DNQHHX/0D2DSkpKSW4C0BeAAJBYJqoAgq+Kp0e/r9ibeB/
-        /3j3//FxCV+Aia2Bj49vuY6Ozg2gq7YBne8C0oAS1XzABMXOwsnCxs66OHia0f/ad/7/I3c7/XcNdvlv
-        YmSyCqiEB5hPxIGRwgVNfKhATU0V7BJmBhZrYWveJ4Zblf5rnpH7b5Fs+l9TVXMzUAkb0ACIYlwA6EwG
-        FU5VRhY2Vl9OS/b9krFi9zVM1U+Ki4p729nZQVURAMIMEgzSDOoMXAw8/LwMfMpcLNyiDCwgx4HDCQ0w
-        MAAATmjC+OYt2JYAAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="tltGeneral.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>162, 17</value>
-  </metadata>
   <data name="imgEqualizer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhFwAOAPABAACgzv///yH/C05FVFNDQVBFMi4wAwEAAAAh/wt4bXAgZGF0YXhtcP8/eHBhY2tl
@@ -1606,7 +1584,7 @@
         YII=
 </value>
   </data>
-  <data name="radio_mitre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="mitre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAahJREFUOE+lk01LAlEUhv09/YG29Q9CJTehG+lrU7mKUgQxCXOVUpCzc6IEDSfb
@@ -1633,7 +1611,7 @@
         XsL6kezoNrMIe1YFifcz4A2TBIMcpSZA8AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="del_plata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="delPlata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAqpJREFUOE+Nk+tLVFEUxaUoSMMQpPBRFPQn1IegwiAmC80cyMnUMisV0UKUwcRS
@@ -1650,7 +1628,7 @@
         M64456pR62X8/RqdojFBNS5QPDS5VdfZYo3yByoUk//gAuA3M/5UO1i5InIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="el_destape.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="elDestape.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAATtJREFUOE/NUT1LA0EQzV8TxM4fk8oibYyKTRAV/CgisjYXPNREA1EEQSV4SoKK
@@ -1661,7 +1639,7 @@
         lDo7LWO3R8OsmGwELJh0Bu2QxTjuq8AP8NcCwCe+ItxHYcVvCgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="radio_rivadavia.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="rivadavia.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAYJJREFUOE+lU01LAlEU9eelGLkQXOgi6B8ELkxXDoSQi4ooXUcRFDaDTAilphgI
@@ -1673,7 +1651,7 @@
         dmZ8V8Mw7N7kIMsizwToIxoiiyxqd09Z3KdwCMwDwXH8C3+JfwoAH3OWv3Ldte1wAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="radio_latina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="latina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAdtJREFUOE/Nkt1Lk2EYxt9/wdMK0g477SAJc5u4JCsqFioVacqmZGOa+3pH22Af
@@ -1687,7 +1665,7 @@
         18SD8K8DEvwERpf6gikF7/wAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="cnn_radio_argentina.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cnn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAb1JREFUOE+dkdsrBGEYxt3IDReuKH+HS+5cOpSsklKSHHMoN1zJhVJOpZBDEkUO
@@ -1700,6 +1678,9 @@
         TXDq6xDxeQpgYkZ8xXvsmSgK4A02It+TkxTLMMVMQMQu/lW/An4AUYeu9tFAut0AAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="tltGeneral.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>162, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAQEAAAAEAIAAoQgAARgAAADAwAAABACAAqCUAAG5CAAAgIAAAAQAgAKgQAAAWaAAAEBAAAAEA
