@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace RadioStationApp.classes
 {
-    public static class RadioNames
+    class RadioNames
     {
-        public const string LaRed = "la_red";
+        public const string LaRed = "laRed";
         public const string Continental = "continental";
         public const string Metro = "metro";
         public const string Mitre = "mitre";
         public const string Vorterix = "vorterix";
-        public const string DelPlata = "del_plata";
-        public const string ElDestape = "el_destape";
+        public const string DelPlata = "delPlata";
+        public const string ElDestape = "elDestape";
         public const string Rivadavia = "rivadavia";
         public const string Latina = "latina";
-        public const string CNN = "cnn_argentina";
+        public const string CNN = "cnn";
     }
 }

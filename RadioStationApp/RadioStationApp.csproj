@@ -58,6 +58,10 @@
       <HintPath>..\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -77,6 +81,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\ExternalRadioData.cs" />
     <Compile Include="classes\RadioNames.cs" />
     <Compile Include="classes\ProjectInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -94,6 +99,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="RadioStationForm.resx">
       <DependentUpon>RadioStationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,15 +179,12 @@
     <Content Include="resources\icons\thumbnails\speaker_mute.ico" />
     <Content Include="resources\icons\thumbnails\stop.ico" />
     <Content Include="resources\icons\thumbnails\previous.ico" />
+    <Content Include="resources\images\buttons\refresh.png" />
     <Content Include="resources\images\buttons\headphones.png" />
     <Content Include="resources\images\buttons\online_radio.png" />
-    <Content Include="resources\images\buttons\stop_alternative.png" />
-    <Content Include="resources\images\buttons\wave_signal.png" />
     <Content Include="resources\images\buttons\speaker.png" />
     <Content Include="resources\images\buttons\speaker_mute.png" />
     <Content Include="resources\images\buttons\info.png" />
-    <Content Include="resources\images\buttons\speaker_alternative.png" />
-    <Content Include="resources\images\buttons\speaker_mute_alternative.png" />
     <Content Include="resources\images\buttons\stop.png" />
     <Content Include="resources\images\equalizer.gif" />
     <Content Include="resources\images\Radio_LaRed_AM_910.jpg" />
