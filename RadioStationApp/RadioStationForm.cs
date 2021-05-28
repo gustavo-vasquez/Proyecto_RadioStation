@@ -143,6 +143,8 @@ namespace RadioStationApp
 
         private void InitializeBASSLibrary(bool enablePlugins)
         {
+            Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, 5000);
+
             if (!Bass.LoadMe())
                 MessageBox.Show("No se cargó la libreria Bass.");
 
