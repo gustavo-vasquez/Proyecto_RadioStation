@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Un4seen.Bass;
 
@@ -31,32 +32,31 @@ namespace RadioStationApp
             InitializeComponent();
             InitializeBASSLibrary(true);
             InitializeTaskbarControls();
-            MouseWheel += trackBarVolume_MouseWheel;
             trackBarVolume.MouseWheel += trackBarVolume_MouseWheel;
         }
 
         #region Form events
 
-        private void btnLaRed_Click(object sender, EventArgs e)
+        private async void btnLaRed_Click(object sender, EventArgs e)
         {   
             Radio radio = RadioGroup.Stations[RadioNames.LaRed];
 
-            if(PlayRadioStream(radio.Url, radio.Description))
+            if (await PlayRadioStream(radio.Url, radio.Description))
                 btnLaRed.Enabled = false;
         }
 
-        private void btnContinental_Click(object sender, EventArgs e)
+        private async void btnContinental_Click(object sender, EventArgs e)
         {
             Radio radio = RadioGroup.Stations[RadioNames.Continental];
 
-            if(PlayRadioStream(radio.Url, radio.Description))
+            if (await PlayRadioStream(radio.Url, radio.Description))
                 btnContinental.Enabled = false;
         }
 
-        private void btnCustomRadio_Click(object sender, EventArgs e)
+        private async void btnCustomRadio_Click(object sender, EventArgs e)
         {
             if(txtCustomRadio.Text != _customRadioPlaceHolder && !string.IsNullOrWhiteSpace(txtCustomRadio.Text))
-                PlayRadioStream(txtCustomRadio.Text, "Radio personalizada");
+                await PlayRadioStream(txtCustomRadio.Text, "Radio personalizada");
         }
 
         private void btnStopStream_Click(object sender, EventArgs e)
@@ -112,7 +112,7 @@ namespace RadioStationApp
             DialogResult AppInfoWindow = MessageBox.Show(appInfoText, "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void RadiosItem_Click(object sender, EventArgs e)
+        private async void RadiosItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem currentMenuItem = sender as ToolStripMenuItem;
 
@@ -127,7 +127,7 @@ namespace RadioStationApp
                     item.Enabled = true;
                 });
 
-                if(PlayRadioStream(radio.Url, radio.Description))
+                if (await PlayRadioStream(radio.Url, radio.Description))
                     currentMenuItem.Enabled = false;
             }
         }
@@ -141,28 +141,30 @@ namespace RadioStationApp
 
         #region Library resources
 
-        private void InitializeBASSLibrary(bool enablePlugins)
+        private async void InitializeBASSLibrary(bool enablePlugins)
         {
             Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, 5000);
+            Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_NET_TIMEOUT, 20000);
 
             if (!Bass.LoadMe())
                 MessageBox.Show("No se cargó la libreria Bass.");
 
-            if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
+            if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, Handle))
                 MessageBox.Show("No se pudo inicializar la salida de audio.");
 
             if (enablePlugins)
-                _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(Application.StartupPath, "addons"));
+                _plugins = await Task.Run(() => Bass.BASS_PluginLoadDirectory(Path.Combine(Application.StartupPath, "addons")));
         }
 
         private void FreeBASSResources()
         {
-            Bass.BASS_StreamFree(_stream);
-            Bass.BASS_Free();
-
             if (_plugins != null)
                 foreach (int plugin in _plugins.Keys)
                     Bass.BASS_PluginFree(plugin);
+
+            Bass.BASS_StreamFree(_stream);
+            Bass.BASS_Stop();
+            Bass.BASS_Free();
         }
 
         #endregion
@@ -171,19 +173,6 @@ namespace RadioStationApp
 
         private void InitializeTaskbarControls()
         {
-            muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker, "Silenciar");
-            muteThumbnailButton.Click += (sender, args) =>
-            {
-                MuteRadioStream();
-            };
-
-            previousThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.previous, "Sintonizar radio anterior");
-            previousThumbnailButton.Click += (sender, args) =>
-            {
-                if (_previousStreamUrl != null && _previousStreamDescription != null)
-                    PlayRadioStream(_previousStreamUrl, _previousStreamDescription);
-            };
-
             stopThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.stop, "Detener");
             stopThumbnailButton.Click += (sender, args) =>
             {
@@ -192,12 +181,24 @@ namespace RadioStationApp
 
             stopThumbnailButton.Enabled = false;
 
-            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, muteThumbnailButton, previousThumbnailButton, stopThumbnailButton);
+            previousThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.previous, "Sintonizar radio anterior");
+            previousThumbnailButton.Click += async (sender, args) =>
+            {
+                if (_previousStreamUrl != null && _previousStreamDescription != null)
+                     await PlayRadioStream(_previousStreamUrl, _previousStreamDescription);
+            };
+
+            muteThumbnailButton = new ThumbnailToolBarButton(Properties.Resources.speaker, "Silenciar");
+            muteThumbnailButton.Click += (sender, args) =>
+            {
+                MuteRadioStream();
+            };
+
+            TaskbarManager.Instance.ThumbnailToolBars.AddButtons(Handle, stopThumbnailButton, previousThumbnailButton, muteThumbnailButton);
 
             JumpListCommandReceived += (sender, e) =>
             {
                 CheckLineArguments(e.CommandName);
-                WindowState = FormWindowState.Minimized;
             };
 
             Shown += (sender, e) =>
@@ -269,17 +270,25 @@ namespace RadioStationApp
 
         #region Stream playback actions
 
-        private bool PlayRadioStream(string streamUrl, string description)
+        private async Task<bool> PlayRadioStream(string streamUrl, string description)
         {
-            if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
+            if (Bass.BASS_IsStarted())
                 StopRadioStream();
 
-            _stream = Bass.BASS_StreamCreateURL(streamUrl, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
+            txtMessage.Text = "Transmitiendo...";
+            string error_code = string.Empty;
+            
+            _stream = await Task.Run(() =>
+            {
+                int stream = Bass.BASS_StreamCreateURL(streamUrl, 0, BASSFlag.BASS_STREAM_AUTOFREE, null, IntPtr.Zero);
+                error_code = Bass.BASS_ErrorGetCode().ToString();
+                return stream;
+            });
 
             if (_stream != 0)
             {
-                Bass.BASS_ChannelPlay(_stream, false);
                 Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, _volume);
+                Bass.BASS_ChannelPlay(_stream, false);
                 _currentStreamUrl = streamUrl;
                 _currentStreamDescription = description;
 
@@ -292,15 +301,16 @@ namespace RadioStationApp
             }
             else
             {
-                txtMessage.Text = "La url expiró o es incorrecta (" + Bass.BASS_ErrorGetCode().ToString() + ")";
+                txtMessage.Text = "La url expiró o es incorrecta (" + error_code + ")";
 
                 return false;
-            }   
+            }
         }
 
         private void StopRadioStream()
         {
             Bass.BASS_ChannelStop(_stream);
+
             _previousStreamUrl = _currentStreamUrl;
             _previousStreamDescription = _currentStreamDescription;
 
@@ -336,10 +346,9 @@ namespace RadioStationApp
 
         #endregion
 
-        private void updateRadioLinks_Click(object sender, EventArgs e)
+        private async void updateRadioLinks_Click(object sender, EventArgs e)
         {
             txtUpdateRadioLinks.Text = "Actualizando enlaces...";
-            RadioGroup.UpdateRadioLinks();
 
             var t = new Timer();
             t.Interval = 3000;
@@ -349,7 +358,7 @@ namespace RadioStationApp
                 t.Stop();
             };
 
-            txtUpdateRadioLinks.Text = "Enlaces actualizados.";
+            txtUpdateRadioLinks.Text = await RadioGroup.UpdateRadioLinks();
             t.Start();
         }
 
@@ -362,14 +371,14 @@ namespace RadioStationApp
 
         private void trackBarVolume_MouseWheel(object sender, MouseEventArgs e)
         {
-            int newVolume = trackBarVolume.Value;
-
-            try
+            if (trackBarVolume.Enabled)
             {
-                ((HandledMouseEventArgs)e).Handled = true; // disable default mouse wheel
+                int newVolume = trackBarVolume.Value;
 
-                if (_volume != 0f)
+                try
                 {
+                    ((HandledMouseEventArgs)e).Handled = true; // disable default mouse wheel
+
                     if (e.Delta > 0)
                     {
                         if (trackBarVolume.Value < trackBarVolume.Maximum)
@@ -383,15 +392,15 @@ namespace RadioStationApp
 
                     trackBarVolume.Value = newVolume;
                 }
-            }
-            catch (Exception error)
-            {
-                if (error is ArgumentOutOfRangeException)
+                catch (Exception error)
                 {
-                    if (newVolume < trackBarVolume.Minimum)
-                        trackBarVolume.Value = 0;
-                    else if (newVolume > trackBarVolume.Maximum)
-                        trackBarVolume.Value = 100;
+                    if (error is ArgumentOutOfRangeException)
+                    {
+                        if (newVolume < trackBarVolume.Minimum)
+                            trackBarVolume.Value = 0;
+                        else if (newVolume > trackBarVolume.Maximum)
+                            trackBarVolume.Value = 100;
+                    }
                 }
             }
         }

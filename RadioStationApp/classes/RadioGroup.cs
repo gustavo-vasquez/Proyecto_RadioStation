@@ -111,51 +111,60 @@ namespace RadioStationApp.classes
             return updatedList;
         }
 
-        public async static void UpdateRadioLinks()
+        public async static Task<string> UpdateRadioLinks()
         {
-            IEnumerable<ExternalRadioData> updatedRadioList = await GetUpdatedList();
-
-            foreach (ExternalRadioData radio in updatedRadioList)
+            try
             {
-                switch(radio.Name)
-                {
-                    case RadioNames.LaRed:
-                        Stations[RadioNames.LaRed].Url = Properties.Settings.Default.laRed = radio.Url;
-                        break;
-                    case RadioNames.Continental:
-                        Stations[RadioNames.Continental].Url = Properties.Settings.Default.continental = radio.Url;
-                        break;
-                    case RadioNames.Metro:
-                        Stations[RadioNames.Metro].Url = Properties.Settings.Default.metro = radio.Url;
-                        break;
-                    case RadioNames.Mitre:
-                        Stations[RadioNames.Mitre].Url = Properties.Settings.Default.mitre = radio.Url;
-                        break;
-                    case RadioNames.Vorterix:
-                        Stations[RadioNames.Vorterix].Url = Properties.Settings.Default.vorterix = radio.Url;
-                        break;
-                    case RadioNames.DelPlata:
-                        Stations[RadioNames.DelPlata].Url = Properties.Settings.Default.delPlata = radio.Url;
-                        break;
-                    case RadioNames.ElDestape:
-                        Stations[RadioNames.ElDestape].Url = Properties.Settings.Default.elDestape = radio.Url;
-                        break;
-                    case RadioNames.Rivadavia:
-                        Stations[RadioNames.Rivadavia].Url = Properties.Settings.Default.rivadavia = radio.Url;
-                        break;
-                    case RadioNames.Latina:
-                        Stations[RadioNames.Latina].Url = Properties.Settings.Default.latina = radio.Url;
-                        break;
-                    case RadioNames.CNN:
-                        Stations[RadioNames.CNN].Url = Properties.Settings.Default.cnn = radio.Url;
-                        break;
-                    default:
-                        break;
-                }
-            }
+                IEnumerable<ExternalRadioData> updatedRadioList = await GetUpdatedList();
 
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Reload();
+                foreach (ExternalRadioData radio in updatedRadioList)
+                {
+                    switch (radio.Name)
+                    {
+                        case RadioNames.LaRed:
+                            Stations[RadioNames.LaRed].Url = Properties.Settings.Default.laRed = radio.Url;
+                            break;
+                        case RadioNames.Continental:
+                            Stations[RadioNames.Continental].Url = Properties.Settings.Default.continental = radio.Url;
+                            break;
+                        case RadioNames.Metro:
+                            Stations[RadioNames.Metro].Url = Properties.Settings.Default.metro = radio.Url;
+                            break;
+                        case RadioNames.Mitre:
+                            Stations[RadioNames.Mitre].Url = Properties.Settings.Default.mitre = radio.Url;
+                            break;
+                        case RadioNames.Vorterix:
+                            Stations[RadioNames.Vorterix].Url = Properties.Settings.Default.vorterix = radio.Url;
+                            break;
+                        case RadioNames.DelPlata:
+                            Stations[RadioNames.DelPlata].Url = Properties.Settings.Default.delPlata = radio.Url;
+                            break;
+                        case RadioNames.ElDestape:
+                            Stations[RadioNames.ElDestape].Url = Properties.Settings.Default.elDestape = radio.Url;
+                            break;
+                        case RadioNames.Rivadavia:
+                            Stations[RadioNames.Rivadavia].Url = Properties.Settings.Default.rivadavia = radio.Url;
+                            break;
+                        case RadioNames.Latina:
+                            Stations[RadioNames.Latina].Url = Properties.Settings.Default.latina = radio.Url;
+                            break;
+                        case RadioNames.CNN:
+                            Stations[RadioNames.CNN].Url = Properties.Settings.Default.cnn = radio.Url;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Reload();
+
+                return "Enlaces actualizados.";
+            }
+            catch
+            {
+                return "Error al actualizar enlaces.";
+            }
         }
     }
 }

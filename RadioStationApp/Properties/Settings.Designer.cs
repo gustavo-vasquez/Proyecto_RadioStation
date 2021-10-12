@@ -25,8 +25,7 @@ namespace RadioStationApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://latamstreaming-live-os.akamaized.net/live_passthrough/amlared/chunks.m3u8" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://21933.live.streamtheworld.com/LA_RED_AM910AAC.aac")]
         public string laRed {
             get {
                 return ((string)(this["laRed"]));
@@ -86,7 +85,7 @@ namespace RadioStationApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://181.119.157.98:8000/amdelplata.mp3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://181.119.157.98:8800/amdelplata.mp3")]
         public string delPlata {
             get {
                 return ((string)(this["delPlata"]));

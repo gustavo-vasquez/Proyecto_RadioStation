@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="laRed" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://latamstreaming-live-os.akamaized.net/live_passthrough/amlared/chunks.m3u8</Value>
+      <Value Profile="(Default)">https://21933.live.streamtheworld.com/LA_RED_AM910AAC.aac</Value>
     </Setting>
     <Setting Name="continental" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://20823.live.streamtheworld.com/CONTINENTAL_SC</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)">http://104.131.4.100:8000/stream</Value>
     </Setting>
     <Setting Name="delPlata" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://181.119.157.98:8000/amdelplata.mp3</Value>
+      <Value Profile="(Default)">http://181.119.157.98:8800/amdelplata.mp3</Value>
     </Setting>
     <Setting Name="elDestape" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://cdn2.instream.audio/:8000/stream</Value>
